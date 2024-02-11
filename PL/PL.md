@@ -86,7 +86,7 @@ f.close()
 Devemos sempre fechar os ficheiros quando já não os estivemos a usar.
 
 # Classes
-As classes tem de ter \_\_init\_\_(self,..), _\_\str_\_\(self)
+As classes tem de ter \_\_init\_\_(self,..), \_\_str\_\_(self)
 Os atributos das classes tem de ser publicos, nao ha opcao.
 
 # VER ENUMS
