@@ -96,7 +96,7 @@ Os atributos das classes tem de ser publicos, nao ha opcao.
 Defina a funcao **frequencia** que dada uma frase, calcula a frequencia de todas as palavras.
 ~~~
 def freqencia(frase):
-    palavras=map(lambda palavra: ''.join(filter(x.isalpha(),frase.split()))) #isalpha #split sem algumentos divide por espacoes e \n Podemos por .lower para meter minusculas
+    palavras=map(lambda palavra: ''.join(filter(x.isalpha(),frase.split())))
     freq=dict()
     for palavra in palavra:
         if palavra in freq:
