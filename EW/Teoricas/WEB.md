@@ -63,7 +63,7 @@ Teriamos então como resultado: {1:"ola",2:"ola"}
 ~~~
 Temos tags de abertura e fecho. As self-tags não tem conteudo textual pelo que não terminam e com />. Na tag de abertura podemos ter atributos.
 
-Paragrafos faz-se com a tag <p>. Os cabeçalhos com a tag <hx> em que x pode ir de 1 a 6. O número escolhido muda o tamanho da letra do título. <i> para itálico e <b> bolt. <code> para meter codigo. Podemos colocar ainda links nas tags com o atributo <a ...>.
+Paragrafos faz-se com a tag `<p>`. Os cabeçalhos com a tag `<hx>` em que x pode ir de 1 a 6. O número escolhido muda o tamanho da letra do título. `<i>` para itálico e `<b>` bolt. `<code>` para meter codigo. Podemos colocar ainda links nas tags com o atributo `<a ...>`.
 
 Temos ainda listas em html.
 ~~~
