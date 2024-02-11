@@ -91,6 +91,7 @@ Os atributos das classes tem de ser publicos, nao ha opcao.
 
 # VER ENUMS
 
+# Exercicios de revisao de Python
 ## Exercicios 1
 Defina a funcao **frequencia** que dada uma frase, calcula a frequencia de todas as palavras.
 ~~~
