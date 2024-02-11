@@ -48,7 +48,7 @@ for i, cor in enumerate(cores2):
 
 #VER A CENA DE JUNTAR TUDO NUM TUPLO
     
-#Funcoes de ordem superior em Python
+# Funcoes de ordem superior em Python
 ~~~
 dobros=map(lambda x: x*2,range(1,6)) 
 ~~~
