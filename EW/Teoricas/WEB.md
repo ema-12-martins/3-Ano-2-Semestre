@@ -84,13 +84,14 @@ Temos ainda listas em html.
 ~~~
 
 # URL 
-Localizador de uma página web. Este segue o seguinte protcolo/formato: //host/dir/subdir/.../filename. **Exemplo**: http://www.di.uminho.pt/~jcr/engweb.html#aval
+Localizador de uma página web. Este segue o seguinte protcolo/formato: //host/dir/subdir/.../filename. 
 
-O # leva permite-nos navegar para uma parte da página.
+**Exemplo**: http://www.di.uminho.pt/~jcr/engweb.html#aval
+
+O **#** leva permite-nos navegar para uma parte da página.
 
 Tipos dos elementos:
 Os **inline** são difernetes dos **block** porque levam uma quebra de linha depois e antes.
-
 Inline: span,b,i...
 Block: div,p
 
