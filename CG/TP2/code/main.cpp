@@ -6,6 +6,11 @@
 
 #include <math.h>
 
+float translate=0;
+float rotate=0;
+
+
+
 void changeSize(int w, int h) {
 
 	// Prevent a divide by zero, when window is too short
@@ -31,6 +36,49 @@ void changeSize(int w, int h) {
 	glMatrixMode(GL_MODELVIEW);
 }
 
+void draw_piramid(){
+	glBegin(GL_TRIANGLES);
+		glColor3f(1.0f, 1.0f, 1.0f);
+		glVertex3f(1.0f, 0.0f, 1.0f);
+		glVertex3f(0.0f, 1.0f, 0.0f);
+		glVertex3f(-1.0f, 0.0f, 1.0f);
+	glEnd();
+
+	glBegin(GL_TRIANGLES);
+		glColor3f(1.0f, 1.0f, 0.0f);
+		glVertex3f(1.0f, 0.0f, -1.0f);
+		glVertex3f(0.0f, 1.0f, 0.0f);
+		glVertex3f(1.0f, 0.0f, 1.0f);	
+	glEnd(); 
+
+	glBegin(GL_TRIANGLES);
+		glColor3f(0.0f, 1.0f, 1.0f);
+		glVertex3f(1.0f, 0.0f, -1.0f);
+		glVertex3f(0.0f, 1.0f, 0.0f);
+		glVertex3f(-1.0f, 0.0f, -1.0f);
+	glEnd(); 
+
+	glBegin(GL_TRIANGLES);
+		glColor3f(1.0f, 0.0f, 1.0f);
+		glVertex3f(-1.0f, 0.0f, -1.0f);
+		glVertex3f(0.0f, 1.0f, 0.0f);
+		glVertex3f(-1.0f, 0.0f, 1.0f);
+	glEnd();
+}
+
+void keyboard_inputs(unsigned char key, int x, int y) {
+    if(key == 'w') {
+        translate += 1;
+    } else if (key == 's') {
+        translate -= 1;
+    } else if (key == 'a') {
+        rotate = rotate + 15;
+    } else if (key == 'd') {
+        rotate = rotate - 15;
+    }
+
+	glutPostRedisplay();
+}
 
 void renderScene(void) {
 
@@ -43,13 +91,29 @@ void renderScene(void) {
 		      0.0,0.0,0.0,
 			  0.0f,1.0f,0.0f);
 
-// put axis drawing in here
+	// put axis drawing in here
+	glBegin(GL_LINES);
+		// X axis in red
+		glColor3f(1.0f, 0.0f, 0.0f);
+		glVertex3f(-100.0f, 0.0f, 0.0f);
+		glVertex3f( 100.0f, 0.0f, 0.0f);
+		// Y Axis in Green
+		glColor3f(0.0f, 1.0f, 0.0f);
+		glVertex3f(0.0f, -100.0f, 0.0f);
+		glVertex3f(0.0f, 100.0f, 0.0f);
+		// Z Axis in Blue
+		glColor3f(0.0f, 0.0f, 1.0f);
+		glVertex3f(0.0f, 0.0f, -100.0f);
+		glVertex3f(0.0f, 0.0f, 100.0f);
+	glEnd();
 
 
-// put the geometric transformations here
+	// put the geometric transformations here
+	glTranslatef(translate,0.0f,0.0f);
+	glRotatef(rotate,0.0f,1.0f,0.0f);
 
-
-// put pyramid drawing instructions here
+	// put pyramid drawing instructions here
+	draw_piramid();
 
 
 	// End of frame
@@ -59,7 +123,7 @@ void renderScene(void) {
 
 
 // write function to process keyboard events
-
+//glTranslatef(x,y,z);
 
 
 
@@ -80,7 +144,7 @@ int main(int argc, char **argv) {
 
 	
 // put here the registration of the keyboard callbacks
-
+glutKeyboardFunc(keyboard_inputs);
 
 
 //  OpenGL settings

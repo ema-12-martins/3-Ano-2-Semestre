@@ -48,6 +48,10 @@ void renderScene(void){
 	float teapotScale1 = (sin(muda_tamanho) + 1.0f)/2.0f;
 	float teapotScale2 = teapotScale1 * (max-min) + min;
 	glutWireTeapot(teapotScale2);
+	
+	//OUTRA FORMA - Variar com o tempo - Solucao do stor
+	//auto ms=duration_cast<milisseconds>(system_clock::now().time_since_epoch()).count();
+	//double dimensiom = 0.7 + sin(ms*0.0001)/2
 
 	
 	// End of frame
