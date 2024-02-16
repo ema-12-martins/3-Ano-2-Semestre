@@ -6,8 +6,9 @@
 
 #include <math.h>
 
-float translate=0;
-float rotate=0;
+float translate=0.0f;
+float rotate=0.0f;
+float scale=1.0f;
 
 
 
@@ -38,21 +39,21 @@ void changeSize(int w, int h) {
 
 void draw_piramid(){
 	glBegin(GL_TRIANGLES);
-		glColor3f(1.0f, 1.0f, 1.0f);
+		glColor3f(1.0f, 0.8f, 1.0f);
 		glVertex3f(1.0f, 0.0f, 1.0f);
 		glVertex3f(0.0f, 2.0f, 0.0f);
 		glVertex3f(-1.0f, 0.0f, 1.0f);
 	glEnd();
 
 	glBegin(GL_TRIANGLES);
-		glColor3f(1.0f, 1.0f, 0.0f);
+		glColor3f(1.0f, 0.65f, 1.0f);
 		glVertex3f(1.0f, 0.0f, -1.0f);
 		glVertex3f(0.0f, 2.0f, 0.0f);
 		glVertex3f(1.0f, 0.0f, 1.0f);	
 	glEnd(); 
 
 	glBegin(GL_TRIANGLES);
-		glColor3f(0.0f, 1.0f, 1.0f);
+		glColor3f(1.0f, 0.5f, 1.0f);
 		glVertex3f(-1.0f, 0.0f, -1.0f);
 		glVertex3f(0.0f, 2.0f, 0.0f);
 		glVertex3f(1.0f, 0.0f, -1.0f);
@@ -60,11 +61,30 @@ void draw_piramid(){
 	glEnd(); 
 
 	glBegin(GL_TRIANGLES);
-		glColor3f(1.0f, 0.0f, 1.0f);
+		glColor3f(1.00f, 0.35f, 1.0f);
 		glVertex3f(-1.0f, 0.0f, 1.0f);
 		glVertex3f(0.0f, 2.0f, 0.0f);
 		glVertex3f(-1.0f, 0.0f, -1.0f);
 	glEnd();
+
+	//Para desenhar a base
+	glBegin(GL_TRIANGLES);
+		glColor3f(1.0f, 1.0f, 1.0f);
+		glVertex3f(1.0f, 0.0f, 1.0f);
+		glVertex3f(1.0f, 0.0f, -1.0f);
+		glVertex3f(-1.0f, 0.0f, 1.0f);
+	glEnd();
+
+	glBegin(GL_TRIANGLES);
+		glColor3f(1.0f, 1.0f, 1.0f);
+		glVertex3f(1.0f, 0.0f, -1.0f);
+		glVertex3f(-1.0f, 0.0f, -1.0f);
+		glVertex3f(-1.0f, 0.0f, 1.0f);
+	glEnd();
+
+	
+
+
 }
 
 void keyboard_inputs(unsigned char key, int x, int y) {
@@ -78,6 +98,23 @@ void keyboard_inputs(unsigned char key, int x, int y) {
         rotate = rotate - 15;
     }
 
+	glutPostRedisplay();
+}
+
+void keyboard_special_inputs(int key_code, int x, int y){
+	switch (key_code){
+		case GLUT_KEY_UP:
+			if (scale<2){
+				scale+=1;
+			}
+			break;
+		case GLUT_KEY_DOWN:
+			if (scale>-1){
+				scale-=1;
+			}
+			break;
+
+	}
 	glutPostRedisplay();
 }
 
@@ -112,6 +149,7 @@ void renderScene(void) {
 	// put the geometric transformations here
 	glTranslatef(translate,0.0f,0.0f);
 	glRotatef(rotate,0.0f,1.0f,0.0f);
+	glScalef(scale,scale,scale);
 
 	// put pyramid drawing instructions here
 	draw_piramid();
@@ -121,10 +159,6 @@ void renderScene(void) {
 	glutSwapBuffers();
 }
 
-
-
-// write function to process keyboard events
-//glTranslatef(x,y,z);
 
 
 
@@ -146,6 +180,7 @@ int main(int argc, char **argv) {
 	
 // put here the registration of the keyboard callbacks
 glutKeyboardFunc(keyboard_inputs);
+glutSpecialFunc(keyboard_special_inputs);
 
 
 //  OpenGL settings
