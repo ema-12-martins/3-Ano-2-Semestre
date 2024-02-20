@@ -42,7 +42,7 @@ def pronomes(linha):
 
 #7- Recebe uma string e determina se a mesma é um nome válido para uma variável, ou seja, se começa por uma letra e apenas contém letras, números ou underscores.
 def valida_variavel(variavel):
-    print(re.match(r"[a-z][a-z_0-9]*",variavel,flags=re.IGNORECASE))
+    print(re.search(r"^[a-z][a-z_0-9]*$",variavel,flags=re.IGNORECASE))
 
 
 def main():
