@@ -22,7 +22,7 @@ def main(tipo_operacao,letra_deslocamento,frase):
             novo_char =chr(((ord(frase[i])-65)-(ord(letra_deslocamento)-65)%26)+65)
             resultado+=novo_char
         
-    print(resultado)
+    return resultado
 
 if __name__ == "__main__":
     main(sys.argv[1],sys.argv[2],sys.argv[3])
