@@ -81,12 +81,13 @@ void drawCylinder(float radius, float height, int slices) {
 			glVertex3f(cos((i-1)*alpha)*radius,height/2, sin((i-1)*alpha)*radius);
 		glEnd();
 
-		glBegin(GL_TRIANGLES); 
+		glBegin(GL_TRIANGLES);
 			glColor3f(1.0f, 0.8f, 1.0f);
-			glVertex3f(cos(i*alpha)*radius,-height/2, sin(i*alpha)*radius);
-			glVertex3f(cos((i-1)*alpha)*radius,-height/2, sin((i-1)*alpha)*radius);
 			glVertex3f(cos(i*alpha)*radius,height/2, sin(i*alpha)*radius);
+			glVertex3f(cos(i*alpha)*radius,-height/2, sin(i*alpha)*radius);
+			glVertex3f(cos((i-1)*alpha)*radius, height/2, sin((i-1)*alpha)*radius);
 		glEnd();
+		
 	}
 }
 
@@ -134,10 +135,10 @@ void processSpecialKeys(int key, int xx, int yy) {
 			beta-=0.2;
 			break;
 		case GLUT_KEY_RIGHT:
-			alpha+=0.2;
+			alpha-=0.2;
 			break;
 		case GLUT_KEY_LEFT:
-			alpha-=0.2;
+			alpha+=0.2;
 			break;
 	}
 	glutPostRedisplay();
