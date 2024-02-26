@@ -90,5 +90,6 @@ Como não especificamos a rota, todas elas vão ficar com o texto da pag1.html.
 Temos de notar que:
 - **req.method** retorna o método (POST,GET...)
 - **req.url** retorna o URL
+- Para irmos subscar uma parte do URL do pedido **url.parse(req.url,true).pathname.substring(num);**
 
 Podemos usar regex para determinar o que temos de exibir na página.
