@@ -14,14 +14,13 @@ def main(tipo_operacao,letra_deslocamento,frase):
     resultado=""
     if(tipo_operacao=="enc"):
         for i in range (len(frase)):
-            novo_char =chr(((ord(frase[i])-65)+(ord(letra_deslocamento)-65)%26)+65)
+            novo_char =chr(((ord(frase[i]) - 65) + (ord(letra_deslocamento) - 65)) % 26 + 65)
             resultado+=novo_char
         
     elif(tipo_operacao=="dec"):
         for i in range (len(frase)):
-            novo_char =chr(((ord(frase[i])-65)-(ord(letra_deslocamento)-65)%26)+65)
+            novo_char =chr(((ord(frase[i]) - 65) - (ord(letra_deslocamento) - 65)) % 26 + 65)
             resultado+=novo_char
-        
     return resultado
 
 if __name__ == "__main__":
