@@ -66,7 +66,7 @@ http.createServer((req, res) => {
         });
     
     } else if (req.url == '/animais') {
-        axios.get("http://localhost:3000/ocorrencias")
+        axios.get("http://localhost:3000/ocorrencias") //Podemos fazer queries aqui
             .then(resp => {
                 console.log(resp);
                 res.writeHead(200, { 'Content-type': 'text/html', 'charset': 'utf-8' });
