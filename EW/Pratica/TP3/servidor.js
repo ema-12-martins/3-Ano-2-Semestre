@@ -65,17 +65,17 @@ http.createServer((req, res) => {
             res.end();
         });
     
-    } else if (req.url == '/animais') {
-        axios.get("http://localhost:3000/ocorrencias") //Podemos fazer queries aqui
+    } else if (req.url == '/caesPretos') {
+        axios.get("http://localhost:3000/ocorrencias?SpeciesIDDesc=DOG&color=BLACK") //Podemos fazer queries aqui
             .then(resp => {
                 console.log(resp);
-                res.writeHead(200, { 'Content-type': 'text/html', 'charset': 'utf-8' });
+                res.writeHead(200, { 'Content-type': 'text/html;charset= utf-8' });
                 html=genOcorrencias(resp.data)
                 res.write(html);
                 res.end();
             })
             .catch(erro => {
-                res.writeHead(500, { 'Content-type': 'text/html', 'charset': 'utf-8' });
+                res.writeHead(500, { 'Content-type': 'text/html;charset= utf-8' });
                 res.write("<p>Ocorreu um erro: " + erro + "</p>");
                 res.end();
             });
@@ -84,17 +84,17 @@ http.createServer((req, res) => {
         axios.get("http://localhost:3000/ocorrencias")
             .then(resp => {
                 console.log(resp);
-                res.writeHead(200, { 'Content-type': 'text/json', 'charset': 'utf-8' });
+                res.writeHead(200, { 'Content-type': 'text/json;charset= utf-8' });
                 res.write(JSON.stringify(resp.data));
                 res.end();
             })
             .catch(erro => {
-                res.writeHead(500, { 'Content-type': 'text/html', 'charset': 'utf-8' });
+                res.writeHead(500, { 'Content-type': 'text/html;charset= utf-8' });
                 res.write("<p>Ocorreu um erro: " + erro + "</p>");
                 res.end();
             });
     } else {
-        res.writeHead(400, { 'Content-type': 'text/html', 'charset': 'utf-8' });
+        res.writeHead(400, { 'Content-type': 'text/html;charset= utf-8' });
         res.write("<pre>Erro: Pedido não suportado</pre>");
         res.write("<pre>" + req.url + "</pre>");
         res.end();
