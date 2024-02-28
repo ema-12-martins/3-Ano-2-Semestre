@@ -11,9 +11,7 @@ def main(*args):
         nome_ficheiro_guarda_chave = args[3]
 
         with open(nome_ficheiro_guarda_chave, "wb") as ficheiro:
-            chave=bad_prng(num_bytes_a_gerar)
-            print(chave)
-            ficheiro.write(chave)
+            ficheiro.write(bad_prng(num_bytes_a_gerar))
     
     elif args[1] == "enc" or args[1] == "dec":
         ficheiro_com_criptograma = args[2]
