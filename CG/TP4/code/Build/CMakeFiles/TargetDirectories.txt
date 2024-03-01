@@ -1,0 +1,3 @@
+/home/emamartins12/GIT/3-Ano-2-Semestre/CG/TP4/code/Build/CMakeFiles/class4.dir
+/home/emamartins12/GIT/3-Ano-2-Semestre/CG/TP4/code/Build/CMakeFiles/edit_cache.dir
+/home/emamartins12/GIT/3-Ano-2-Semestre/CG/TP4/code/Build/CMakeFiles/rebuild_cache.dir
