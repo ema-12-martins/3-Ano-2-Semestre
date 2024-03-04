@@ -2,30 +2,26 @@ import sys
 import os
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms
 
-def attack(cipher_text_file_path,position,position_cipher_text,plaintext):
-    with open(cipher_text_file_path,'rb') as cipher_text_file:
+# This attack is supposed to change some letters in the cipher_text
+def attack(cipher_text_file_path, position, text_in_the_position, new_text):
+    with open(cipher_text_file_path, 'rb') as cipher_text_file:
         nonce=cipher_text_file.read(16)
-        cipher_text=cipher_text_file.read()
+        cipher_text = bytearray(cipher_text_file.read()) #Because it's an array of bytes, it is immutable
 
-    
-
-
-    with open(f"{cipher_text_file_path}.dec",'wb') as plaintext_file:
-        plaintext_file.write(plaintext)
+    position=int(position)
+    new_text=new_text.encode()
+    text_in_the_position=text_in_the_position.encode()
+    for i in range(len(text_in_the_position)):
+        cipher_text[position + i] ^= text_in_the_position[i]
+        cipher_text[position + i] ^= new_text[i]
+        
+    with open(f"{cipher_text_file_path}.attck", 'wb') as plaintext_file:
+        plaintext_file.write(nonce)
+        plaintext_file.write(cipher_text)
 
 
 def main():
-    try:
-        if sys.argv[1]=='setup':
-            generateKey(sys.argv[2])
-        elif sys.argv[1]=='enc':
-            encrypt(sys.argv[2],sys.argv[3])
-        elif sys.argv[1]=='dec':
-            decrypt(sys.argv[2],sys.argv[3])
-    except:
-        print("Some error ocorred")
+        attack(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4])
 
 if __name__ == "__main__":
     main()
-
-
