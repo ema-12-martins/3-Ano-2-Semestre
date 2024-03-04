@@ -83,3 +83,21 @@ Nota: **fieldset** mete uma caisa á volta dos componente que engolba.
 # Estrutura aplicacional
 Pasta do serviço:
 - Public: Imagens, JavaScript e CSS.
+
+# TPC4
+
+dataset compositores musicais.
+colocar o dayaset no json-server
+Rotas importantes:
+
+/compositores
+
+/compositores/{id}
+
+/compositores?perido={periodo}
+
+/periodos
+
+/peiodos/{id}
+
+Implementar as operacaes crud sobre compositores e sobre periodos.
