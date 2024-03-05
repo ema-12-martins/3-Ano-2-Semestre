@@ -1,0 +1,5 @@
+# Q2
+Um NONCE fixo pode levar a problemas de segurança das cifras, nomeadamente nos modos CBC e CTR. Se um NONCE for usado repetidamente com a mesma chave, gerará chaves de cifras muito semelhantes. Essa semelhança leva a que seja possível detectar padrões, especialmente se os dados a encriptar forem muito semelhantes, o que, com análise estatística, pode levar à descoberta de partes da mensagem. Com um NONCE fixo, a aleatoriedade dos dados criptográficos é posta em causa, podendo comprometer a confidencialidade e a integridade dos dados.
+
+# Q3
+Uma vez que os programas cfich_aes_cbc.py e cfich_aes_ctr.py utilizam AES com modos CBC (Cipher Block Chaining) e CTR (Counter Mode) respectivamente, usar o programa chacha20_int_attck.py não faria sentido. Para começar, o ataque à integridade de dados proporcionado pelo ChaCha20 é específico desse algoritmo. Apesar de o AES em modo CBC e CTR serem também algoritmos de cifra simétrica, estes realizam cifras por bloco. Assim, a sua unidade de processamento é o bloco e não os bytes. Dessa forma, seria impossível realizar o ataque anterior, pois cada parte do texto encontra-se cifrado em blocos diferentes.
