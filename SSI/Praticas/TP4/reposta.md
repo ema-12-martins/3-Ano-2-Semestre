@@ -1,0 +1,2 @@
+# Q1
+O programa chacha20_int_attck.py não teria efeito porque o ataque que ele executa é direcionado à integridade dos dados. Quando um código de autenticação de mensagem (MAC) está em uso, ele garante a integridade dos dados, pois verifica se os dados foram modificados.
