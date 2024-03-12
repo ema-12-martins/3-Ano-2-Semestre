@@ -4,16 +4,15 @@ tokens=(
     "NUMBER",
     "BOOLEAN",
     "WORD",
-    'LPAREN',
-    'RPAREN',
     'COMMA',
 )
+
+#O nome fica igaul ao token
+literals=["[","]"]
 
 t_NUMBER = r"\d+(\.\d+)?"
 t_WORD = r"\w+"
 t_BOOLEAN = r"(True|False)"
-t_LPAREN = r"\["
-t_RPAREN = r"\]"
 t_COMMA = r","
 
 t_ignore = ' \t\n'  
