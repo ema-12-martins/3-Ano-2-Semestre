@@ -7,6 +7,22 @@ router.get('/', function(req, res, next) {
     axios.get("http://localhost:3000/alunos?_sort=nome")
         .then(resp=>{
             alunos=resp.data
+            alunos.forEach(element => {
+              let sum=0;
+              for(const [key,value] of Object.entries(element)){
+                if(key.startsWith("tpc")){
+                  sum+=parseInt(value)
+                }
+              }
+              element.tcpTotal=sum;
+              teste=parseFloat(element.teste)
+              pratica=parseFloat(element.pratica)
+              if(teste>=10 && pratica>10){
+                element.final=teste*.45+pratica*.35+(element.tcpTotal * 20 /8)*.2
+              }else{
+                element.final="R"
+              }
+            });
             res.status(200).render("studentsListPage",{"lAlunos":alunos,"date":d})
             res.end()
 
