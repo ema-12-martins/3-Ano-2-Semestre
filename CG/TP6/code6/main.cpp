@@ -48,7 +48,7 @@ void changeSize(int w, int h) {
 
 	// return to the model view matrix mode
 	glMatrixMode(GL_MODELVIEW);
-}
+} 
 
 
 
@@ -73,6 +73,7 @@ void renderScene(void) {
 
 	glClearColor(0.0f,0.0f,0.0f,0.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
 	glLoadIdentity();
 	gluLookAt(camX, camY, camZ, 
@@ -194,7 +195,7 @@ void init() {
         }
     }
 	int arraySize = sizeof(float) * vertexB.size(); 
-	
+
 	glewInit();
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glGenBuffers(1, buffers);
