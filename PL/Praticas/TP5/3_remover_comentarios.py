@@ -35,7 +35,6 @@ def t_comentariolinha_FIMLINHA(t):
 def t_INITIAL_qualquercoisa(t):
     r'(.|\n)'
     t.lexer.texto_ignora_comentario += t.value 
-    print( t.lexer.texto_ignora_comentario)
 
 def t_ANY_error(t):
     t.lexer.skip(1)
@@ -65,3 +64,6 @@ while True:
     if not tok:
         break
     print(tok)
+
+print(lexer.texto_ignora_comentario)
+
