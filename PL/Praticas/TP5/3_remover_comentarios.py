@@ -29,6 +29,7 @@ def t_INITIAL_INICIOLINHA(t):
 
 def t_comentariolinha_FIMLINHA(t):
     r'\n'
+    t.lexer.texto_ignora_comentario += t.value 
     lexer.begin('INITIAL')
     pass  
 
