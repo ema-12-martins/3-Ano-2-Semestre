@@ -62,14 +62,23 @@ async def handle_echo(reader, writer):
     srvwrk = ServerWorker(conn_cnt, addr)
 
     #Le os dados recebidos e processaos ate que nao haja mais dados
+
+    #Aguarda que haja mais dados para ler, com tamanho max de max_size
     data = await reader.read(max_msg_size)
     while True:
+        #Se nao houver dados para ler, passa para a proxima iteração
         if not data: continue
+        #Se o primeiro byte for /n, entao para o ciclo
         if data[:1]==b'\n': break
+        #Os dados lidos vao passar para para serverm processados
         data = srvwrk.process(data)
+        #Se nao houver mais dados a serem processados, o loop é interrompido.
         if not data: break
+        #Escreve para o cliente
         writer.write(data)
+        #Aguarda que todos os dados tenham sido escritos
         await writer.drain()
+        #Le novamente para a proxima iteracao
         data = await reader.read(max_msg_size)
     print("[%d]" % srvwrk.id)
     writer.close()
