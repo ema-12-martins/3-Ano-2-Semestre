@@ -80,10 +80,9 @@ void renderScene(void) {
 		      0.0,0.0,0.0,
 			  0.0f,1.0f,0.0f);
 
-	drawTerrain();
-
 	// just so that it renders something before the terrain is built
 	// to erase when the terrain is ready
+	drawTerrain();
 	glutWireTeapot(2.0);
 
 // End of frame
@@ -178,6 +177,9 @@ void init() {
     tw = ilGetInteger(IL_IMAGE_WIDTH);
     th = ilGetInteger(IL_IMAGE_HEIGHT);
     imageData = ilGetData();
+	printf("%d",tw);
+	printf("%d",th);
+	
 
     // Build the vertex arrays
     std::vector<float> vertexB;
@@ -185,12 +187,16 @@ void init() {
     // Fill vertexB with data
     for(int i = 0; i < 255; i++) { // Linhas
         for(int j = 0; j < 255; j++) { // Colunas
+			unsigned char pixelValue = imageData[(i * tw + j)];
+			float height = (float)pixelValue;
             vertexB.push_back(j);
-            vertexB.push_back(0);
+            vertexB.push_back(height);
             vertexB.push_back(i);
 
+			pixelValue = imageData[((i+1) * tw + j)];
+			height = (float)pixelValue;
             vertexB.push_back(j);
-            vertexB.push_back(0);
+            vertexB.push_back(pixelValue);
             vertexB.push_back(i+1);
         }
     }
