@@ -31,8 +31,13 @@ class ServerWorker(object):
 
     def process(self, msg):
         if self.msg_cnt == 0:
-            self.peer_public_key = load_der_public_key(msg)
-            self.shared_key = self.server_private_key.exchange(self.peer_public_key)
+            print(msg)
+            
+            try:
+                self.peer_public_key = load_der_public_key(msg)
+                self.shared_key = self.server_private_key.exchange(self.peer_public_key)
+            except Exception as e:
+                print("Error loading DER public key:", e)
             self.derived_key = HKDF(
                 algorithm=hashes.SHA256(),
                 length=32,
