@@ -1,0 +1,171 @@
+:root {
+  --background-color: #ECEEEC;
+  --accent-color: #7DF6B4;
+  --accent-color-dark: #77d5a1;
+  --light-color: #FFF;
+  --dark-color: #000;
+  --text-secondary-color: #3F3F3F;
+  --border-color: #4D4D4D;
+}
+
+/*.....................EMA......................*/
+#gallery{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);;
+  gap: 2px;
+  justify-content: center; 
+  align-items: center;
+}
+
+.bloggers-gallery {
+  width: 100%; 
+  max-height: 100%;
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  background-color: rgba(0, 0, 0, 0.7); 
+  color: var(--light-color); 
+  font-size: 1rem;
+  padding: 0.5rem;
+  text-align: center;
+  box-sizing: border-box; 
+  display: none;
+}
+
+
+.gallery-item {
+  position: relative;
+}
+
+.gallery-item:hover .overlay {
+  display: block;
+}
+
+/*................................................*/
+
+#app{
+  background-color: var(--background-color);
+  display: grid;
+  grid-template-rows:50px auto auto auto 100px;
+  grid-template-columns:1fr 3fr 2fr 1fr;
+  column-gap: 20px;
+  row-gap: 20px;
+  grid-template-areas: 
+    "header header  header     header"
+    ".      posts   categories ."
+    ".      posts   bloggers   ."
+    ".      posts   .          ."
+    "footer footer  footer     footer"
+    ;
+}
+
+ul{
+  list-style-type: none;
+  padding: 0;
+}
+
+.categorias{
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.autor_data{
+  margin: 0;
+  color: var(--text-secondary-color);
+}
+
+.card {
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: var(--light-color);
+}
+
+.categorias:hover {
+  color: var(--accent-color-dark);
+}
+
+#nav {
+  grid-area: header;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+#main {
+  grid-area: posts;
+}
+
+aside {
+  grid-area: categories;
+} 
+
+section{
+  grid-area: bloggers;
+}
+
+.catArtigos{
+  margin-bottom:0.5rem;
+  margin-right: 20px;
+  margin-top: 10px;
+  border-width: 1px;
+  border-style:solid;
+  border-color: var(--border-color);
+  border-radius: 10px;
+  background-color: var(--background-color);
+}
+
+.botao{
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  background-color: var(--light-color);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.botao:hover {
+  background-color: var(--accent-colork);
+}
+
+.signup{
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  background-color: var(--accent-color);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.signup:hover {
+  background-color: var(--dark-color);
+}retniop 
+
+
+
+retniop 
+
+
+#footer{
+  grid-area: footer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--light-color);
+}
+
+
+html, body {
+  margin: 0;
+  font-family: 'Anek Latin';
+}
+
+
+
+
+

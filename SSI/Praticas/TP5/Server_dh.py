@@ -34,20 +34,22 @@ class ServerWorker(object):
             return self._process_message(msg)
 
     def _process_handshake(self, msg):
-        self.peer_public_key = load_der_public_key(msg)
-        self.shared_key = self.server_private_key.exchange(self.peer_public_key)
-        self.derived_key = HKDF(
-            algorithm=hashes.SHA256(),
-            length=32,
-            salt=None,
-            info=b'handshake data',
-        ).derive(self.shared_key)
-        self.aesgcm = AESGCM(self.derived_key)
-        self.msg_cnt += 1
-        return self.server_public_key.public_bytes(encoding=serialization.Encoding.DER,format=serialization.PublicFormat.SubjectPublicKeyInfo)
+        if (self.msg_cnt==0):
+            self.peer_public_key = load_der_public_key(msg)
+            self.shared_key = self.server_private_key.exchange(self.peer_public_key)
+            self.derived_key = HKDF(
+                algorithm=hashes.SHA256(),
+                length=32,
+                salt=None,
+                info=b'handshake data',
+            ).derive(self.shared_key)
+            self.aesgcm = AESGCM(self.derived_key)
+            self.msg_cnt += 1
+            return self.server_public_key.public_bytes(encoding=serialization.Encoding.DER,format=serialization.PublicFormat.SubjectPublicKeyInfo)
+        return self._process_message(msg)
 
     def _process_message(self, msg):
-        
+        self.msg_cnt+=1
         if msg:
             nonce = msg[:12]
             informacao = msg[12:]
@@ -60,7 +62,7 @@ class ServerWorker(object):
         print("new msg: ", new_msg.decode())
 
         nonce = os.urandom(12)
-        ct = nonce + self.aesgcm.encrypt(nonce, new_msg.encode(), aad)
+        ct = nonce + self.aesgcm.encrypt(nonce, new_msg, aad)
         return ct if len(new_msg) > 0 else None
 
 
