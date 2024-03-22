@@ -67,7 +67,7 @@ void drawTerrain() {
 }
 
 float h(int i, int j){
-	return (float)imageData[(i * tw + j)];
+	return (float)imageData[(i * tw + j)]*0.5;
 }
 
 
@@ -90,6 +90,8 @@ float altura_final(int px,int pz){
 
 
 void renderScene(void) {
+	ang_rotate+=1;
+
 
 	float pos[4] = {-1.0, 1.0, 1.0, 0.0};
 
@@ -145,7 +147,7 @@ void renderScene(void) {
 	for (int i=0;i<1000;i++){
 		x = ((float)rand() / RAND_MAX) * 255;
     	z = ((float)rand() / RAND_MAX) * 255;
-		if((x * x) + (z * z) > (25 * 25)){
+		if(((x-122.5) * (x-122.5)) + ((z-122.5) * (z-122.5)) > (25 * 25)){
 			glPushMatrix();
 			glColor3f(0.6f, 0.3f, 0.0f);
 			glTranslatef(-122.5,0,-122.5); //Por causa do terreno estar para o lado
