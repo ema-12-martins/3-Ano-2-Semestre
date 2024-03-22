@@ -80,10 +80,11 @@ void renderScene(void) {
 		      0.0,0.0,0.0,
 			  0.0f,1.0f,0.0f);
 
+	glColor3f(0.0f,0.8f,0.0f);
+	glTranslatef(-122.5,0,-122.5);
 	// just so that it renders something before the terrain is built
 	// to erase when the terrain is ready
 	drawTerrain();
-	glutWireTeapot(2.0);
 
 // End of frame
 	glutSwapBuffers();

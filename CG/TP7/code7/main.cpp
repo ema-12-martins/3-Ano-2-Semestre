@@ -66,6 +66,27 @@ void drawTerrain() {
 	}
 }
 
+float h(int i, int j){
+	return (float)imageData[(i * tw + j)];
+}
+
+
+float altura_final(int px,int pz){
+	int x1 = floor(px); 
+	int x2 = x1 + 1;
+	int z1 = floor(pz); 
+	int z2 = z1 + 1;
+
+	float fz = pz - z1;
+	float fx = px - x1;
+
+	float h_x1_z = h(x1,z1) * (1-fz) + h(x1,z2) * fz;
+	float h_x2_z = h(x2,z1) * (1-fz) + h(x2,z2) * fz;
+	float height_xz = h_x1_z * (1 - fx) + h_x2_z * fx;
+	return height_xz;
+
+}
+
 
 
 void renderScene(void) {
@@ -122,17 +143,18 @@ void renderScene(void) {
 	int x;
 	int z;
 	for (int i=0;i<1000;i++){
-		x=((float(rand())/RAND_MAX)*200)-100;
-		z=((float(rand())/RAND_MAX)*200)-100;
+		x = ((float)rand() / RAND_MAX) * 255;
+    	z = ((float)rand() / RAND_MAX) * 255;
 		if((x * x) + (z * z) > (25 * 25)){
 			glPushMatrix();
 			glColor3f(0.6f, 0.3f, 0.0f);
-			glTranslatef(x, 0, z);
+			glTranslatef(-122.5,0,-122.5); //Por causa do terreno estar para o lado
+			glTranslatef(x, (int)altura_final(z,x), z);
 			glRotatef(-90, 1, 0, 0);
-			glutSolidCone(1,6, 20,20);
+			glutSolidCone(1,6,20,20); //Mudamos y aqui
 			glColor3f(0.0f, 0.6f, 0.0f);
 			glTranslatef(0, 0, 4);
-			glutSolidCone(3,3,20,20);
+			glutSolidCone(3,3,20,20); //Mudamos y aqui
 			glPopMatrix();
 		}
 	}
@@ -240,16 +262,12 @@ void init() {
     // Fill vertexB with data
     for(int i = 0; i < 255; i++) { // Linhas
         for(int j = 0; j < 255; j++) { // Colunas
-			unsigned char pixelValue = imageData[(i * tw + j)];
-			float height = (float)pixelValue;
             vertexB.push_back(j);
-            vertexB.push_back(height);
+            vertexB.push_back(h(i,j));
             vertexB.push_back(i);
 
-			pixelValue = imageData[((i+1) * tw + j)];
-			height = (float)pixelValue;
             vertexB.push_back(j);
-            vertexB.push_back(pixelValue);
+            vertexB.push_back(h(i+1,j));
             vertexB.push_back(i+1);
         }
     }
