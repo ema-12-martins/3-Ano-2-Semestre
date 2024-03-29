@@ -32,6 +32,7 @@ class Client:
         self.clientRSA_public_key = self.clientRSA_private_key.public_key()
 
         self.client_certificate=mc.cert_load('MSG_CLI1.crt')
+        self.ca_certificate=mc.cert_load('MSG_CA.crt')
 
         
     def process(self, msg=b""):
@@ -49,7 +50,6 @@ class Client:
         
         elif self.msg_cnt==1:
             self.peerRSA_public_key = load_pem_public_key(mc.unpair(mc.unpair(mc.unpair(msg)[0])[0])[0])
-            server_certificate=x509.load_pem_x509_certificate((mc.unpair(msg)[1]), default_backend())
             gy = int.from_bytes(mc.unpair(mc.unpair(mc.unpair(msg)[0])[0])[1],'big')
             self.shared_key = gy**self.exp
 
@@ -62,9 +62,8 @@ class Client:
             ).derive(self.shared_key.to_bytes(1000, 'big')))
 
             # Server Certificate Validation
-            mc.valida_cert(server_certificate)
-            
-
+            server_certificate=x509.load_pem_x509_certificate(mc.unpair(msg)[1])
+            mc.valida_certServidor(self.ca_certificate,server_certificate)
 
             #Server Signature Validation
             nonce = mc.unpair(mc.unpair(msg)[0])[1][:12]

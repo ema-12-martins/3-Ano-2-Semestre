@@ -30,10 +30,10 @@ class ServerWorker(object):
         with open('MSG_SERVER.key','rb') as key_file:
             self.serverRSA_private_key = serialization.load_pem_private_key(key_file.read(),password=b"1234")
 
-        
-        self.certificate=mc.cert_load('MSG_SERVER.crt')
-
         self.serverRSA_public_key = self.serverRSA_private_key.public_key()
+
+        self.certificate=mc.cert_load('MSG_SERVER.crt')
+        self.ca_certificate=mc.cert_load('MSG_CA.crt')
 
 
     def process(self, msg):
@@ -82,10 +82,9 @@ class ServerWorker(object):
             aad = b""
             serverDecryptedSignature = self.aesgcm.decrypt(nonce, serverEncryptedSignature, aad)
 
-            client_certificate=x509.load_pem_x509_certificate((mc.unpair(msg)[1]), default_backend())
-
-            # Server Certificate Validation
-            mc.valida_cert(client_certificate)
+            # Client Certificate Validation
+            client_certificate=x509.load_pem_x509_certificate(mc.unpair(msg)[1])
+            mc.valida_certCliente(self.ca_certificate,client_certificate)
             
             try:
                 self.peerRSA_public_key.verify(

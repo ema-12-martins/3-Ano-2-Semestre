@@ -35,31 +35,6 @@ Seria para [VERBO INFINITIVO]? Tentaram perguntar a [NOME DE PESSOA FAMOSA], que
 Desanimados, pegaram no objeto e deixaram-no no [NOME DE LOCAL MASCULINO] mais próximo.
 Talvez os [NOME PLURAL MASCULINO] de lá conseguissem encontrar alguma utilidade para aquilo."""
 
-conversao_nomes = """Este texto foi feito por Sofia Guilherme Rodrigues dos Santos, com
-base no texto original de Pedro Rafael Paiva Moura, com a ajuda
-do professor Pedro Rangel Henriques e do professor José João Antunes Guimarães
-Dias De Almeida.
-Apesar de partilharem o mesmo apelido, a Sofia não é da mesma família do famoso
-autor José Rodrigues dos Santos."""
-
-lista_codigos_postais = [
-    "4700-000", # válido
-    "9876543", # inválido
-    "1234-567", # válido
-    "8x41-5a3", # inválido
-    "84234-12", # inválido
-    "4583--321", # inválido
-    "9481-025" # válido
-]
-
-abreviaturas = {
-    "UM": "Universidade do Minho",
-    "LEI": "Licenciatura em Engenharia Informática",
-    "UC": "Unidade Curricular",
-    "PL": "Processamento de Linguagens"
-}
-
-texto_abreviaturas = "A /abrev{UC} de /abrev{PL} é muito fixe! É uma /abrev{UC} que acrescenta muito ao curso de /abrev{LEI} da /abrev{UM}."
 
 #....................................EXERCICIOS..........................................
 
@@ -98,27 +73,6 @@ def ficheiro_validos_dic(ficheiros):
                 lista_resultados[resultado.group(1)]=[ficheiro]
     return lista_resultados
 
-#3- Escreve um filtro de texto que converte cada nome completo de uma pessoa encontrada num texto fonte, no formato PrimeiroNome SegundoNome. Por exemplo, "Rui Vieira de Castro" passa a "Castro, Rui". Atenção aos conectores "de", "dos", etc.
-def troca_forma_nome(conversao_nomes):
-    novo_texto = re.sub(r"([A-Z]\w+)(?:\s(?:[A-Z]\w+|d[eao]s?))+\s([A-Z]\w+)",r"\2,\1",conversao_nomes)
-    #como os nomes podem ter acentos, usamos o \w. o ?: é para nao considerar aquele grupo de captura
-    return novo_texto
-
-#4-Define uma função codigos_postais que recebe uma lista de códigos postais e divide-os com base no hífen. Ao contrário do exercício da ficha anterior, esta função pode receber códigos postais inválidos. A função deve devolver uma lista de pares e apenas processar cada linha uma vez.
-def valida_cod_postais(lista_codigos_postais):
-    expressao_regular=re.compile(r"(\d{4})-(\d{3})")
-
-    lista_codigos_validos=[]
-    for elem in lista_codigos_postais:
-        if r:=re.match(expressao_regular,elem): #Posso fazer isto com os grupos de captura
-            lista_codigos_validos.append((r.group(0),r.group(1)))
-    return lista_codigos_validos
-
-#5-Escreve um filtro de texto que expanda as abreviaturas que encontrar no texto fonte no formato "/abrev".
-def subs_abreviaturas(texto_abreviaturas):
-    return(re.sub("/abrev\{(\w+)\}",lambda m: abreviaturas[m.group(1)] ,texto_abreviaturas)) #m é a correspondencia
-    
-
 #7-O jogo Mad Libs, bastante comum em países como os Estados Unidos, consiste em pegar num texto com espaços para algumas palavras e preencher esses espaços de acordo com o tipo de palavra que é pedida.
 def prompt(m):
     resposta = input("Introduz um(a)"+ m.group(1)+":")
@@ -130,14 +84,11 @@ def mad_libs_func(texto):
 
 def main():
     
-    #print(codigos_postais(codigos_postais_lista))
-    #print(iso_8601(texto))
-    #print(ficheiro_validos(file_names))
-    #print(ficheiro_validos_dic(file_names))
-    #print(mad_libs_func(mad_libs))
-    #print(troca_forma_nome(conversao_nomes))
-    #print(valida_cod_postais(lista_codigos_postais))
-    print(subs_abreviaturas(texto_abreviaturas))
+    print(codigos_postais(codigos_postais_lista))
+    print(iso_8601(texto))
+    print(ficheiro_validos(file_names))
+    print(ficheiro_validos_dic(file_names))
+    print(mad_libs_func(mad_libs))
 
 if __name__ == "__main__":
     main()

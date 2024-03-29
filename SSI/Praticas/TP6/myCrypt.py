@@ -15,45 +15,54 @@ def unpair(xy):
     y = xy[len_x + 2 :]
     return x, y
 
+
 def cert_load(fname):
     """ lê certificado de ficheiro """
     with open(fname, "rb") as fcert:
         cert = x509.load_pem_x509_certificate(fcert.read())
     return cert
 
+
 def cert_validtime(cert, now=None):
-    """ valida que 'now' se encontra no período
-    de validade do certificado. """
+    """Validate that the current time falls within the validity period of the certificate."""
     if now is None:
-        now = datetime.datetime.now(tz=datetime.timezone.utc)
-    if now < cert.not_valid_before_utc or now >cert.not_valid_after_utc:
+        now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") 
+    
+    nowDate = datetime.datetime.strptime(now, "%Y-%m-%d %H:%M:%S")
+    if nowDate < cert.not_valid_before or nowDate > cert.not_valid_after:
         raise x509.verification.VerificationError("Certificate is not valid at this time")
     
+
 def cert_validsubject(cert, attrs=[]):
     """ verifica atributos do campo 'subject'. 'attrs'
     é uma lista de pares '(attr,value)' que condiciona
     os valores de 'attr' a 'value'. """
-    print(cert.subject)
     for attr in attrs:
         if cert.subject.get_attributes_for_oid(attr[0])[0].value != attr[1]:
             raise x509.verification.VerificationError("Certificate subject does not match expected value")
-                                              
-def cert_validexts(cert, policy=[]):
-    """ valida extensões do certificado. 'policy' é uma lista de pares '(ext,pred)' onde 'ext' é o OID de
-    o predicado responsável por verificar o conteúdo dessa extensão. """
-    for check in policy:
-        ext = cert.extensions.get_extension_for_oid(check[0]).value
-        if not check[1](ext):
-            raise x509.verification.VerificationError("Certificate extensions does not match expected value")
         
-def valida_cert(ca_cert):
+
+def verify_directly_issued_by(ca_cert, cert):    
+    return ca_cert.subject == cert.issuer
+    
+
+def valida_certServidor(ca_cert,serv_cert):
     try:
-        cert = cert_load("MSG_CA.crt")
-        
-        cert.verify_directly_issued_by(ca_cert)
-        cert_validtime(cert)
-        cert_validsubject(cert, [(x509.NameOID.COMMON_NAME, "MSG_CA")])
+        verify_directly_issued_by(ca_cert,serv_cert)
+        cert_validtime(serv_cert)
+        cert_validsubject(serv_cert, [(x509.NameOID.COMMON_NAME, "SSI Message Relay Server")])
         return True
-    except:
-        print("Certificate is invalid!")
-    return False
+    except Exception as e:
+        print(e)
+        return False
+    
+
+def valida_certCliente(ca_cert,client_cert):
+    try:
+        verify_directly_issued_by(ca_cert,client_cert)
+        cert_validtime(client_cert)
+        cert_validsubject(client_cert, [(x509.NameOID.COMMON_NAME, "User 1 (SSI MSG Relay Client 1)")])
+        return True
+    except Exception as e:
+        print(e)
+        return False
