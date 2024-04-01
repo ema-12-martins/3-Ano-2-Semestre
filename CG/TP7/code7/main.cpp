@@ -21,7 +21,7 @@ unsigned char *imageData;
 
 GLuint buffers[100000];
 
-float camX = 00, camY = 30, camZ = 40;
+float position_x = 00, position_y = 30, position_z = 40;
 int startX, startY, tracking = 0;
 
 int alpha = 0, beta = 45, r = 50;
@@ -71,7 +71,7 @@ float h(int i, int j){
 }
 
 
-float altura_final(int px,int pz){
+float hf(int px,int pz){
 	int x1 = floor(px); 
 	int x2 = x1 + 1;
 	int z1 = floor(pz); 
@@ -100,7 +100,7 @@ void renderScene(void) {
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
 	glLoadIdentity();
-	gluLookAt(camX, camY, camZ, 
+	gluLookAt(position_x, position_y, position_z, 
 		      0.0,0.0,0.0,
 			  0.0f,1.0f,0.0f);
 
@@ -151,7 +151,7 @@ void renderScene(void) {
 			glPushMatrix();
 			glColor3f(0.6f, 0.3f, 0.0f);
 			glTranslatef(-122.5,0,-122.5); //Por causa do terreno estar para o lado
-			glTranslatef(x, (int)altura_final(z,x), z);
+			glTranslatef(x, (int)hf(z,x), z);
 			glRotatef(-90, 1, 0, 0);
 			glutSolidCone(1,6,20,20); //Mudamos y aqui
 			glColor3f(0.0f, 0.6f, 0.0f);
@@ -167,7 +167,68 @@ void renderScene(void) {
 }
 
 
+void processSpecialKeys(int key) {
+	float position_y = 1.5 + hf(position_x,position_z); //1.5 corresponde a altura dos olhos
 
+	//look at
+	float look_at_x = position_x+ sin(alpha);
+	float look_at_y = position_x;
+	float look_at_z = position_y+ cos(alpha);
+
+
+	//deslcamento
+	float deslocamento_x = look_at_x-position_x;
+	float deslocamento_y = 0;
+	float deslocamento_z = look_at_z-position_y;
+
+
+	switch (key) {
+
+	case GLUT_KEY_RIGHT: 
+		alpha -= 0.1;
+		
+		//look at
+		float look_at_x = position_x+ sin(alpha);
+		float look_at_y = position_x;
+		float look_at_z = position_y+ cos(alpha);
+
+		break;
+
+	case GLUT_KEY_LEFT:
+		alpha += 0.1;
+		
+		//look at
+		look_at_x = position_x+ sin(alpha);
+		look_at_y = position_x;
+		look_at_z = position_y+ cos(alpha);
+
+		break;
+
+	case GLUT_KEY_UP: //front
+		position_x = position_x + 2*deslocamento_x;
+		position_y = position_y + 2*deslocamento_y;
+		position_z = position_y + 2*deslocamento_z;
+		look_at_x = look_at_x + 2*deslocamento_x;
+		look_at_y = look_at_y + 2*deslocamento_y;
+		look_at_z = look_at_z + 2*deslocamento_z;
+		break;
+
+	case GLUT_KEY_DOWN:
+		position_x = position_x - 2*deslocamento_x;
+		position_y = position_y - 2*deslocamento_y;
+		position_z = position_y - 2*deslocamento_z;
+		look_at_x = look_at_x - 2*deslocamento_x;
+		look_at_y = look_at_y - 2*deslocamento_y;
+		look_at_z = look_at_z - 2*deslocamento_z;
+		break;
+	}
+	gluLookAt(position_x, position_y, position_z, 
+		      look_at_x,look_at_y, look_at_z,
+			  0.0f,1.0f,0.0f);
+	
+	glutPostRedisplay();
+
+}
 
 
 void processKeys(unsigned char key, int xx, int yy) {
@@ -238,9 +299,9 @@ void processMouseMotion(int xx, int yy) {
 		if (rAux < 3)
 			rAux = 3;
 	}
-	camX = rAux * sin(alphaAux * 3.14 / 180.0) * cos(betaAux * 3.14 / 180.0);
-	camZ = rAux * cos(alphaAux * 3.14 / 180.0) * cos(betaAux * 3.14 / 180.0);
-	camY = rAux * 							     sin(betaAux * 3.14 / 180.0);
+	position_x = rAux * sin(alphaAux * 3.14 / 180.0) * cos(betaAux * 3.14 / 180.0);
+	position_z = rAux * cos(alphaAux * 3.14 / 180.0) * cos(betaAux * 3.14 / 180.0);
+	position_y = rAux * 							     sin(betaAux * 3.14 / 180.0);
 }
 
 
