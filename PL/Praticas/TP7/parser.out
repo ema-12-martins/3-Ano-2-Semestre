@@ -1,0 +1,144 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> Biblioteca
+Rule 1     Biblioteca -> Livros
+Rule 2     Livros -> Livro
+Rule 3     Livros -> Livro ; Livros
+Rule 4     Livro -> Titulo Autor Ano ISBN
+Rule 5     Titulo -> TEXTO
+Rule 6     Autor -> TEXTO
+Rule 7     Ano -> INT
+
+Terminals, with rules where they appear
+
+;                    : 3
+INT                  : 7
+ISBN                 : 4
+TEXTO                : 5 6
+error                : 
+
+Nonterminals, with rules where they appear
+
+Ano                  : 4
+Autor                : 4
+Biblioteca           : 0
+Livro                : 2 3
+Livros               : 1 3
+Titulo               : 4
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . Biblioteca
+    (1) Biblioteca -> . Livros
+    (2) Livros -> . Livro
+    (3) Livros -> . Livro ; Livros
+    (4) Livro -> . Titulo Autor Ano ISBN
+    (5) Titulo -> . TEXTO
+
+    TEXTO           shift and go to state 5
+
+    Biblioteca                     shift and go to state 1
+    Livros                         shift and go to state 2
+    Livro                          shift and go to state 3
+    Titulo                         shift and go to state 4
+
+state 1
+
+    (0) S' -> Biblioteca .
+
+
+
+state 2
+
+    (1) Biblioteca -> Livros .
+
+    $end            reduce using rule 1 (Biblioteca -> Livros .)
+
+
+state 3
+
+    (2) Livros -> Livro .
+    (3) Livros -> Livro . ; Livros
+
+    $end            reduce using rule 2 (Livros -> Livro .)
+    ;               shift and go to state 6
+
+
+state 4
+
+    (4) Livro -> Titulo . Autor Ano ISBN
+    (6) Autor -> . TEXTO
+
+    TEXTO           shift and go to state 8
+
+    Autor                          shift and go to state 7
+
+state 5
+
+    (5) Titulo -> TEXTO .
+
+    TEXTO           reduce using rule 5 (Titulo -> TEXTO .)
+
+
+state 6
+
+    (3) Livros -> Livro ; . Livros
+    (2) Livros -> . Livro
+    (3) Livros -> . Livro ; Livros
+    (4) Livro -> . Titulo Autor Ano ISBN
+    (5) Titulo -> . TEXTO
+
+    TEXTO           shift and go to state 5
+
+    Livro                          shift and go to state 3
+    Livros                         shift and go to state 9
+    Titulo                         shift and go to state 4
+
+state 7
+
+    (4) Livro -> Titulo Autor . Ano ISBN
+    (7) Ano -> . INT
+
+    INT             shift and go to state 11
+
+    Ano                            shift and go to state 10
+
+state 8
+
+    (6) Autor -> TEXTO .
+
+    INT             reduce using rule 6 (Autor -> TEXTO .)
+
+
+state 9
+
+    (3) Livros -> Livro ; Livros .
+
+    $end            reduce using rule 3 (Livros -> Livro ; Livros .)
+
+
+state 10
+
+    (4) Livro -> Titulo Autor Ano . ISBN
+
+    ISBN            shift and go to state 12
+
+
+state 11
+
+    (7) Ano -> INT .
+
+    ISBN            reduce using rule 7 (Ano -> INT .)
+
+
+state 12
+
+    (4) Livro -> Titulo Autor Ano ISBN .
+
+    ;               reduce using rule 4 (Livro -> Titulo Autor Ano ISBN .)
+    $end            reduce using rule 4 (Livro -> Titulo Autor Ano ISBN .)
+
