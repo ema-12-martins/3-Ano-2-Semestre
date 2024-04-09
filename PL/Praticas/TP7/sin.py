@@ -4,6 +4,7 @@ from lex import tokens #Para ir buscar os tokens do lex
 
 def p_biblio(p):
     '''Biblioteca : Livros'''
+    print("{\n\"Livros\":[",p[1],"]\n}")
     return p
 
 def p_livros1(p):
@@ -33,6 +34,7 @@ def p_auto(p):
 
 def p_ano(p):
     '''Ano : INT'''
+    p[0]=p[1]
     return p
 
 def p_error(p):
