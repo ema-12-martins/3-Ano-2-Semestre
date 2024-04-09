@@ -16,7 +16,7 @@ def p_livros2(p):
 
 def p_livro(p):
     '''Livro : Titulo Autor Ano ISBN'''
-    print("Autor:" + p[1] + " Titulo: " + p[2])
+    print("Autor:" + p[1] + " ---------------> Titulo: " + p[2])
     parser.conta+=1
     return p
 
