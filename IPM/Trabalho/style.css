@@ -1,4 +1,77 @@
-.app{
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-size: 1.8vw;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to bottom, #ff0000, #0000ff);
+}
+
+.app {
+    /*Para centrar*/
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+
+    position: absolute;
     background-color: white;
     color: black;
+    width: 40%;
+    height: 90%;
+    border-radius: 30px; /* Arredondar as bordas em 5px */
+}
+
+.login-bem_vindo{
+    margin-top: 5%;
+    text-align: center; /* Centralizar o texto horizontalmente */
+    font-size: 60px;
+}
+
+.login-posto{
+    text-align: center; 
+    margin-top: 1%;
+}
+.login-horas{
+    text-align: center;
+    font-size: 16px;
+    margin-top: 0.5%;
+}
+.login-data{
+    text-align: center; 
+    font-size: 16px;
+    margin-top: 0.5%;
+}
+
+.login-relembra_pass{
+    text-align: center; 
+    font-size: 16px;
+}
+
+.login-caixa {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 1rem; /*Para as caixas nao ficarem seguidas- espaco para o seguinte*/
+    width: 15rem; 
+    height: 2rem; 
+    border: 1px solid #C4E6FF; /* Adicionar borda preta de 1px */
+    border-radius: 10px; /* Arredondar as bordas em 5px */
+    background-color: #C4E6FF;
+}
+
+.login-botao{
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+    width: 5rem; 
+    height: 2rem;
+    font-size: 1rem;
+
+    border: 1px solid #C4E6FF; /* Adicionar borda preta de 1px */
+    border-radius: 10px; /* Arredondar as bordas em 5px */
+    background-color: #C4E6FF;
+}
+
+.login-h5:hover {
+    text-decoration: underline;
 }
