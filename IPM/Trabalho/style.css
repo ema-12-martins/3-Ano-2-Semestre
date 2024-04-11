@@ -1,11 +1,14 @@
+/*-----------------------------------------CONFIGURACOES GERAIS--------------------------------*/
 html, body {
     height: 100%;
     margin: 0;
     padding: 0;
     font-size: 1.8vw;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     background: linear-gradient(to bottom, #DDEFFF, #002B53);
 }
+
+/*------------------------------------CAIXA BRANCA---------------------------------------------*/
 
 .app {
     /*Para centrar*/
@@ -22,24 +25,25 @@ html, body {
     border-radius: 30px; /* Arredondar as bordas em 5px */
 }
 
+/*-------------------------------PARTE DE CIMA---------------------------------------------------*/
 .login-bem_vindo{
     margin-top: 5%;
     text-align: center; /* Centralizar o texto horizontalmente */
     font-size: 60px;
-    margin-bottom: 2%; /* Adiciona espaço abaixo do elemento */
+    margin-bottom: -1%; /* Adiciona espaço abaixo do elemento */
 }
 
 .login-posto{
     text-align: center; 
     font-size: 20px;
-    margin-bottom: 1%; 
+    margin-bottom: 2%; 
 }
 
 .login-data{
     text-align: center; 
     font-size: 16px;
     margin-top: 0.5%;
-    margin-bottom: 1%;
+    margin-bottom: -0.5%;
 }
 
 .login-horas{
@@ -49,39 +53,17 @@ html, body {
     margin-bottom: 10%; /* Adiciona espaço abaixo do elemento */
 }
 
-.login-relembra_pass{
-    text-align: center; 
-    font-size: 16px;
-}
-
+/*--------------------------------CAIXAS E IMAGENS--------------------------------------------------*/
 .login-caixa {
     display: block;
     margin: 0 auto;
     margin-bottom: 1rem; /*Para as caixas nao ficarem seguidas- espaco para o seguinte*/
-    width: 90%; 
+    width: 80%; 
     height: 2rem; 
     border: 1px solid #C4E6FF; /* Adicionar borda preta de 1px */
     border-radius: 10px; /* Arredondar as bordas em 5px */
     background-color: #C4E6FF;
 }
-
-.login-botao{
-    display: block;
-    margin: 0 auto;
-    margin-bottom: -0.75rem;
-    width: 5rem; 
-    height: 2rem;
-    font-size: 1rem;
-
-    border: 1px solid #C4E6FF; /* Adicionar borda preta de 1px */
-    border-radius: 10px; /* Arredondar as bordas em 5px */
-    background-color: #C4E6FF;
-}
-
-.login-relembra_pass:hover {
-    text-decoration: underline;
-}
-
 
 .login-imagem{
     width: 60%; 
@@ -99,7 +81,7 @@ html, body {
         "login-imagem1  login-caixa1"
         "login-imagem2  login-caixa2"
         ;
-    margin-bottom: 5%;
+    margin-bottom: 10%;
 }
 
 #login-image1 {
@@ -116,4 +98,27 @@ html, body {
 
 #login-caixa2 {
     grid-area: login-caixa2;
+}
+
+/*-------------------------------------FUNDO---------------------------------------------------*/
+.login-botao{
+    display: block;
+    margin: 0 auto;
+    width: 5rem; 
+    height: 2rem;
+    font-size: 1rem;
+    margin-bottom: -0.75rem;
+
+    border: 1px solid #C4E6FF; /* Adicionar borda preta de 1px */
+    border-radius: 10px; /* Arredondar as bordas em 5px */
+    background-color: #C4E6FF;
+}
+
+.login-relembra_pass{
+    text-align: center; 
+    font-size: 16px;
+}
+
+.login-relembra_pass:hover {
+    text-decoration: underline;
 }
