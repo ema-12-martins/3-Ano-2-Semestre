@@ -17,7 +17,7 @@ html, body {
     position: absolute;
     background-color: white;
     color: black;
-    width: 40%;
+    width: 50%;
     height: 90%;
     border-radius: 30px; /* Arredondar as bordas em 5px */
 }
@@ -26,21 +26,27 @@ html, body {
     margin-top: 5%;
     text-align: center; /* Centralizar o texto horizontalmente */
     font-size: 60px;
+    margin-bottom: 2%; /* Adiciona espaço abaixo do elemento */
 }
 
 .login-posto{
     text-align: center; 
-    margin-top: 1%;
+    font-size: 20px;
+    margin-bottom: 1%; 
 }
-.login-horas{
-    text-align: center;
-    font-size: 16px;
-    margin-top: 0.5%;
-}
+
 .login-data{
     text-align: center; 
     font-size: 16px;
     margin-top: 0.5%;
+    margin-bottom: 1%;
+}
+
+.login-horas{
+    text-align: center;
+    font-size: 16px;
+    margin-top: 0.5%;
+    margin-bottom: 10%; /* Adiciona espaço abaixo do elemento */
 }
 
 .login-relembra_pass{
@@ -52,7 +58,7 @@ html, body {
     display: block;
     margin: 0 auto;
     margin-bottom: 1rem; /*Para as caixas nao ficarem seguidas- espaco para o seguinte*/
-    width: 15rem; 
+    width: 90%; 
     height: 2rem; 
     border: 1px solid #C4E6FF; /* Adicionar borda preta de 1px */
     border-radius: 10px; /* Arredondar as bordas em 5px */
@@ -62,7 +68,7 @@ html, body {
 .login-botao{
     display: block;
     margin: 0 auto;
-    margin-bottom: 1rem;
+    margin-bottom: -0.75rem;
     width: 5rem; 
     height: 2rem;
     font-size: 1rem;
@@ -72,6 +78,42 @@ html, body {
     background-color: #C4E6FF;
 }
 
-.login-h5:hover {
+.login-relembra_pass:hover {
     text-decoration: underline;
+}
+
+
+.login-imagem{
+    width: 60%; 
+    height: 80%;
+    display: block;
+    margin: 0 auto;
+}
+
+.login-grid{
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    grid-template-rows:auto auto;
+    align-items: center; /* Alinha os itens verticalmente no centro */
+    grid-template-areas: 
+        "login-imagem1  login-caixa1"
+        "login-imagem2  login-caixa2"
+        ;
+    margin-bottom: 5%;
+}
+
+#login-image1 {
+    grid-area: login-imagem1;
+}
+
+#login-caixa1 {
+    grid-area: login-caixa1;
+}
+
+#login-image2 {
+    grid-area: login-imagem2;
+}
+
+#login-caixa2 {
+    grid-area: login-caixa2;
 }
