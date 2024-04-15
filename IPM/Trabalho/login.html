@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> <!--Importa o view-->
     <title>Login</title>
 </head>
 <body>
-    <div class="app">
+    <div class="app" id="app">
         <!--Parte antes das caixas-->
         <h1 class="login-bem_vindo">Bem-vindo!</h1>
         <h3 class="login-posto">Encontra-se no posto 4!</h3>
@@ -17,14 +18,15 @@
         <!--Caixas-->
         <div class="login-grid">
             <img src="imagens/login.jpg" class='login-imagem' id="login-image1" alt="Icon pessoa">
-            <input type="text" id="login-caixa1" class="login-caixa" id="texto" name="texto">
+            <input type="text" id="login-caixa1" class="login-caixa" id="texto" :value="nome_mecanico" @input="setNomeMecanico" name="texto">
+
             <img src="imagens/login.jpg" class='login-imagem' id="login-image2" alt="Icon pessoa">
-            <input type="text" id="login-caixa2" class="login-caixa" id="texto" name="texto">
+            <input type="text" id="login-caixa2" class="login-caixa" id="texto" :value="pass_mecanico" @input="setPassMecanico" name="texto">
         </div>
         
 
         <!--Botao login-->
-        <button class="login-botao" id="texto" name="texto">Login</button>
+        <button class="login-botao" id="texto" name="texto" @click="validaMecanico">Login</button>
 
 
         <!--O que escreve em baixo-->

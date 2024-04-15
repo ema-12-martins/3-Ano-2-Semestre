@@ -1,19 +1,29 @@
 const app = Vue.createApp({
-    data: function () {
+    data() {
         return {
             nome_mecanico: "",
-            pass_mecanico: ""
+            pass_mecanico: "",
+            data: new Date().toLocaleDateString(),
+            hora: new Date().toLocaleTimeString()
         }
     },
     methods: {
-        valida_mecanico(){ 
-            if((this.nome_mecanico=="venancio" && this.pass_mecanico=="1234")){
-                return true
-            }else{
-                return false
+        validaMecanico() { 
+            let nome = this.nome_mecanico.trim()
+            let pass = this.pass_mecanico.trim()
+
+            if (nome === "venancio" && pass === "1234") {
+                console.log("Próxima Página")
+            } else {
+                console.log("Dados incorretos")
             }
         }
     },
+    mounted() {
+        setInterval(() => {
+            this.hora = new Date().toLocaleTimeString()
+        }, 1000);
+    }
 });
 
-app.mount("#reactive-app");
+app.mount("#app");
