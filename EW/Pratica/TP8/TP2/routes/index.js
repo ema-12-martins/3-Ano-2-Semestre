@@ -8,8 +8,26 @@ var upload = multer ({dest:'uploads'})
 
 
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  var date = new Date().toISOString().substring(0,19)
+  jsonfile.readFile(__dirname+'/../data/dbFiles.json',(err,fileList) =>{
+    if(err){
+      res.render('error',{error:err})
+    }else{
+      res.render('index',{files:fileList, d:date})
+    }
+  })
 });
+
+router.get('/fileContent/:name',(req,res) => {
+  console.log(__dirname + '/../public/fileStore/' + req.params.name)
+  var content = fs.readFileSync(__dirname + '/../public/fileStore/' + req.params.name)
+  res.send(content)
+})
+
+router.get('/download/:name',(req,res) => {
+  console.log(__dirname + '/../public/fileStore/' + req.params.name)
+  res.download(__dirname + '/../public/fileStore/' + req.params.name)
+})
 
 router.post('/files', upload.single('myFile'), (req,res) =>{
   console.log('cdir: '+__dirname);
@@ -18,12 +36,12 @@ router.post('/files', upload.single('myFile'), (req,res) =>{
   let newPath = __dirname +'/../public/fileStore/' + req.file.originalname
   console.log(newPath)
   
-  fs.rename(oldPath,newPath, err =>{ /*Moder o ficheiro da pasta antiga para a nova */
+  fs.rename(oldPath,newPath, err =>{ /*Mover o ficheiro da pasta antiga para a nova */
     if(err) throw err
   })
 
   var date = new Date().toISOString().substring(0,19)
-  var files = jsonfile.readFileSync(__dirname+'/../data/dbFiles.json')
+  var files = jsonfile.readFileSync(__dirname+'/../data/dbFiles.json','utf-8')
 
   files.push({
     date: date,
@@ -32,7 +50,7 @@ router.post('/files', upload.single('myFile'), (req,res) =>{
     size: req.file.size
   })
 
-  jsonfile.writeFileSync(__dirname+'/../data/dbFiles.json',files)
+  jsonfile.writeFileSync(__dirname+'/../data/dbFiles.json',files,'utf-8')
 
   res.redirect('/')
 })
