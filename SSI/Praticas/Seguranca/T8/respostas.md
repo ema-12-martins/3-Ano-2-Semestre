@@ -179,6 +179,7 @@ other::rwx
 Agora, o utilizador a97678 tem permissões num ficheiro que não tinha por não pertencer a nenhum grupo que tem essas permissões.
 ~~~
 sudo setfacl -m u:a97678:w ler
+sudo setfacl -m g:os_meus_numeros:w ler
 ~~~
 Podemos verificar que lhe foram atribuidas as permissões:
 ~~~
@@ -189,6 +190,9 @@ getfacl ler
 # group: emamartins12
 # flags: s--
 user::rwx
+user:a97678:-w-
 group::rwx
+group:os_meus_numeros:-w-
+mask::rwx
 other::rwx
 ~~~
