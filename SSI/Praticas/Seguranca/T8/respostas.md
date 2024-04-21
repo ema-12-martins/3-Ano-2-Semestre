@@ -5,19 +5,19 @@ touch exemplo_ficheiro1
 touch exemplo_ficheiro2
 ~~~
 
-Para ver as minhas permissões:
+Para ver as permissões:
 ~~~
 umask -S
 umask
 ~~~
 Percemos que as minhas permissões são u=rwx,g=rwx,o=rx.u=rwx,g=rwx,o=rx (0002)
 
-Para colocar todos com todas as permissoe,temos de mudar o usemask para 0000.
+Para colocar todos com todas as permissões,temos de mudar o usemask para 0000.
 ~~~
 umask 0000
 ~~~
 
-Para ver as permissoes dos ficheiros:
+Para ver as permissões dos ficheiros:
 ~~~
 ls -l
 ~~~
@@ -91,7 +91,7 @@ a97678:x:1001:
 a108831:x:1002:
 os_meus_numeros:x:1003:
 ~~~
-Agora queremos adicionar os utilizadores a97678 e a108831 para o grupo os_meus_numeros:
+Agora queremos adicionar os utilizadores a97678 e a108831 ao grupo os_meus_numeros:
 ~~~
 sudo usermod -aG os_meus_numeros a97678
 sudo usermod -aG os_meus_numeros a108831
@@ -99,7 +99,7 @@ sudo usermod -aG os_meus_numeros a100534
 sudo usermod -aG sem_todos_numeros a97678
 sudo usermod -aG sem_todos_numeros a108831
 ~~~
-Fazendo o comando anterior, já vemos que foram adicionados ao grupo:
+Fazendo o comando anterior, vemos que foram adicionados ao grupo:
 ~~~
 os_meus_numeros:x:1003:a97678,a108831
 sem_todos_numeros:x:1005:a97678,a108831
@@ -156,12 +156,12 @@ Para definir permissão de setuid para o ficheiro executável gerado a partir do
 ~~~
 sudo chmod u+s ler
 ~~~
-Para confirmar se foram atribuidos a elevação de privilégios:
+Para confirmar se foi atribuida a elevação de privilégios:
 ~~~
 ls -l
 -rwsrwxrwx 1 emamartins12 emamartins12 16208 abr 18 15:08 ler
 ~~~
-Mudei agora de utilizador e verifiquei que mesmo não sendo o criador do ficheiro, foi lhe atribuido as mesmas permissões do que o utilizador que o criou.
+Mudei agora de utilizador e verifiquei que mesmo,apesar de não ser o criador do ficheiro, foi-lhe atribuido as mesmas permissões do que as do utilizador que o criou.
 
 # Q4
 Para ver as permissões da lista extendida:
@@ -176,7 +176,7 @@ user::rwx
 group::rwx
 other::rwx
 ~~~
-Agora, o utilizador a97678 tem permissões num ficheiro que não tinha por não pertencer a nenhum grupo que tem essas permissões.
+Agora, o utilizador a97678 tem permissões num ficheiro que não tinha mesmo não pertencendo a nenhum grupo que tem essas permissões.
 ~~~
 sudo setfacl -m u:a97678:w ler
 sudo setfacl -m g:os_meus_numeros:w ler
