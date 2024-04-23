@@ -4,6 +4,7 @@
 var express = require('express');
 var router = express.Router();
 var Equipa = require('../controllers/equipa')
+var Entrega = require('../controllers/entrega')
 
 /* Listar as Equipa (R) */
 router.get('/', function(req, res) {
@@ -28,10 +29,33 @@ router.post('/', function(req, res) {
 
 /* Alterar uma Equipa (U) */
 router.put('/:id', function(req, res) {
-    Equipa.update(req.params.id, req.body)
-      .then(data => res.jsonp(data))
-      .catch(erro => res.jsonp(erro))
+  Entrega.findByEquipa(req.params.id)
+    .then(listaEntregas => {
+      if(listaEntregas.lenght == 0){
+        Equipa.update(req.params.id, req.body)
+        .then(data => res.jsonp(data))
+        .catch(erro => res.jsonp(erro))
+      }
+    })
+    .catch(erro => res.jsonp(erro))
+   
   });
+
+
+/* Alterar uma Equipa (U) */
+router.delete('/:id', function(req, res) {
+  Entrega.findByEquipa(req.params.id)
+    .then(listaEntregas => {
+      if(listaEntregas.lenght == 0){
+        Equipa.remove(req.params.id, req.body)
+        .then(data => res.jsonp(data))
+        .catch(erro => res.jsonp(erro))
+      }
+    })
+    .catch(erro => res.jsonp(erro))
+   
+  });
+
 
 /* Remover uma Equipa (D ) */
 router.delete('/:id', function(req, res) {

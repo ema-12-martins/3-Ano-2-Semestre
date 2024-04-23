@@ -4,6 +4,7 @@
 var express = require('express');
 var router = express.Router();
 var UC = require('../controllers/uc')
+var Entrega = require('../controllers/entrega')
 
 /* Listar as UC (R) */
 router.get('/', function(req, res) {
@@ -15,7 +16,17 @@ router.get('/', function(req, res) {
 /* Consultar uma UC (R) */
 router.get('/:id', function(req, res) {
     UC.findById(req.params.id)
-      .then(data => res.jsonp(data))
+      .then(ucinfo =>{
+        Entrega.findByUc(ucInfo._id)
+          .then(listaEntregas =>{
+            ucInfo = {
+              ...ucInfo._doc,
+              entregas : listaENtregas
+            }
+            res.jsonp(ucRes)
+          })
+          .catch(erro => res.jsonp(erro))
+      })
       .catch(erro => res.jsonp(erro))
   });
 

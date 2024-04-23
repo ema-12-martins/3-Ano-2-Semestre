@@ -4,6 +4,7 @@
    var express = require('express');
    var router = express.Router();
    var Entrega = require('../controllers/entrega')
+   var EntregaREmovida = require('../controllers/entregaRemovida')
    
    /* Listar as Entrega (R) */
    router.get('/', function(req, res) {
@@ -43,7 +44,23 @@
    /* Remover uma Entrega (D ) */
    router.delete('/:id', function(req, res) {
        Entrega.remove(req.params.id)
-         .then(console.log("Deleted " + req.params.id))
+         .then( entrega => {
+          console.log("Deleted " + req.params.id)
+          entregaRemovida = {
+            removeDate: new Date,
+            uc: entrega.uc,
+            idProjeto:entrega.idProjeto,
+            designacaoProj: entrega.designacaoProj,
+            designacaoEq: entrega.designacaoEq,
+            idEq:entrega.idEq,
+            ficheiro: entrega.ficheiro, 
+            obs:entrega.obs,
+            jsutificacao:req.body.justificacao
+          }
+          EntregaREmovida.insert(entregaRemovida)
+            .then(data => console.log("Deleted " + req.params.id))
+            .catch(erro => res.jsonp(erro))
+         })
          .catch(erro => res.jsonp(erro))
      });
    

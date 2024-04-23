@@ -1,15 +1,15 @@
 const mongoose = require('mongoose')
-var Entrega = require("../models/entrega")
+var EntregaRemovida = require("../models/entregaRemovida")
 
 module.exports.list = () => {
-    return Entrega
+    return EntregaRemovida
         .find()
         .sort({creationDate : 1})
         .exec()
 }
 
 module.exports.findById = id => {
-    return Entrega
+    return EntregaRemovida
         .findOne({_id : id})
         .exec()
 }
@@ -22,47 +22,41 @@ module.exports.findByEquipa = id => {
 }
 
 module.exports.insert = ent => {
-    if((Entrega.find({_id : ent._id}).exec()).length != 1){
-        var newEntrega = new Entrega(ent)
-        return newEntrega.save()
+    if((EntregaRemovida.find({_id : ent._id}).exec()).length != 1){
+        var newEntregaRemovida = new EntregaRemovida(ent)
+        return newEntregaRemovida.save()
     }
 }
 
 module.exports.findByUc = idUc => {
-    return Entrega
+    return EntregaRemovida
         .findOne({uc : idUc}) //model, variavel
         .sort({creationDate : 1})
         .exec()
 }
 
 module.exports.findByProjeto = idProjeto => {
-    return Entrega
+    return EntregaRemovida
         .findOne({idProj : idProjeto}) //model, variavel
         .sort({creationDate : 1})
         .exec()
 }
 
 module.exports.countByProjeto = idProjeto => {
-    return Entrega
+    return EntregaRemovida
         .countDocuments({idProj : idProjeto}) //model, variavel
         .exec()
 }
 
 module.exports.update = (id, ent) => {
-    return Entrega
+    return EntregaRemovida
         .findByIdAndUpdate(id, ent, {new : true})
         .exec()
 }
 
 module.exports.remove = id => {
-    Entrega
+    EntregaRemovida
         .find({_id : id})
         .deleteOne()
-        .exec()
-}
-
-module.exports.remove = id => {
-    return Entrega
-        .findByIdAndDelete({_id : id})
         .exec()
 }

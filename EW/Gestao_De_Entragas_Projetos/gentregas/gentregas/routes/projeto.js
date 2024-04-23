@@ -4,6 +4,7 @@
    var express = require('express');
    var router = express.Router();
    var Projeto = require('../controllers/projeto')
+   var Entrega = require('../controllers/entrega')
    
    /* Listar as Projeto (R) */
    router.get('/', function(req, res) {
@@ -22,7 +23,14 @@
    /* Consultar uma Projeto (R) */
    router.get('/:id', function(req, res) {
        Projeto.findById(req.params.id)
-         .then(data => res.jsonp(data))
+         .then(proj => {
+            Entrega.countByProjeto(proj._id)
+              .then(nEntregas => {
+                proj["n_entregas"] = nEntregas
+                res.jsonp(proj)
+              })
+              .catch(erro =>res.jsonp(erro))
+         })
          .catch(erro => res.jsonp(erro))
      });
    
@@ -35,17 +43,28 @@
    
    /* Alterar uma Projeto (U) */
    router.put('/:id', function(req, res) {
-       Projeto.update(req.params.id, req.body)
-         .then(data => res.jsonp(data))
-         .catch(erro => res.jsonp(erro))
+      Entrega.countByProjeto(req.paramens.id)
+        .then(nEntregas => {
+          if(nEntregas == 0){
+            Projeto.update(req.params.id, req.body)
+                    .then(data => res.jsonp(data))
+                    .catch(erro => res.jsonp(erro))
+          }
+        }).catch(erro => res.jsonp(erro))
      });
    
-   /* Remover uma Projeto (D ) */
+   
+   /* Alterar uma Projeto (U) */
    router.delete('/:id', function(req, res) {
-       Projeto.remove(req.params.id)
-         .then(console.log("Deleted " + req.params.id))
-         .catch(erro => res.jsonp(erro))
-     });
+    Entrega.countByProjeto(req.paramens.id)
+      .then(nEntregas => {
+        if(nEntregas == 0){
+          Projeto.remove(req.params.id, req.body)
+                  .then(data => res.jsonp(data))
+                  .catch(erro => res.jsonp(erro))
+        }
+      }).catch(erro => res.jsonp(erro))
+   });
    
    module.exports = router;
    

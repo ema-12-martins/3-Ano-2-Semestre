@@ -14,6 +14,7 @@ module.exports.findById = id => {
         .exec()
 }
 
+
 module.exports.insert = eq => {
     if((Equipa.find({_id : eq._id}).exec()).length != 1){
         var newEquipa = new Equipa(eq)

@@ -14,6 +14,7 @@ module.exports.findById = id => {
         .exec()
 }
 
+
 module.exports.findByUC = idUC => {
     return Projeto
         .findOne({uc : idUc})
