@@ -35,6 +35,16 @@ npm i passport passport-local --save
 ~~~
 Esta maneira só associa nome e palavra-passe.
 
+# Json web tokens (jwt)
+~~~
+Header + Payload + Assinatura
+~~~
+
+Header tem 2 campos. Tipo de token e algoritmo para filtrar. 
+
+Payload é onde colocamos a informaçao. Tem campos já definidos que usamos. 
+
+Assinatura pega num algoritmo e cifra o header, o payload e o segredo.
 
 # Infos nada relacionadas
 Se mandamos uma RAW tem de ser mandado em formato JSON.
