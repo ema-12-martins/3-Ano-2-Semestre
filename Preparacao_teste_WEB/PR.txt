@@ -1,0 +1,148 @@
+1.1 
+Para colocar a BD no mongoDB, foram usados os seguintes comandos:
+docker start 34a3ad5c07d
+docker cp emprego-cientifico.json mongoEW:/tmp
+docker exec -it mongoEW bash
+mongoimport -d scienceJobs -c contracts /tmp/emprego-cientifico.json
+
+Para testar de tudo correu bem:
+mongosh
+show dbs
+use scienceJobs
+show collections
+db.contracts.find() 
+
+----------------------------------------------------------------------------------------
+1.2
+
+[1]
+db.contracts.countDocuments()
+17943
+
+[2]
+db.contracts.find({'NomeInstituicao':'Universidade do Minho'},{}).count()
+166
+
+[3]
+db.contracts.distinct("AreaCNAEF").sort()
+
+[4]
+db.contracts.aggregate([
+    {
+        $match: {
+            $and: [
+                { DataInicioContrato: { $ne: "" } },
+                { DataFimContrato: { $ne: "" } }
+            ]
+        }
+    },
+    {
+        $project: {
+            yearStart: { $year: { $dateFromString: { dateString: "$DataInicioContrato", format: "%d/%m/%Y" } } },
+            yearEnd: { $year: { $dateFromString: { dateString: "$DataFimContrato", format: "%d/%m/%Y" } } }
+        }
+    },
+    {
+        $group: {
+            _id: "$yearStart",
+            totalContracts: { $sum: 1 }
+        }
+    },
+    {
+        $sort: { "_id": 1 }
+    }
+])
+[
+  { _id: 2017, totalContracts: 800 },
+  { _id: 2018, totalContracts: 1308 },
+  { _id: 2019, totalContracts: 4614 },
+  { _id: 2020, totalContracts: 4836 },
+  { _id: 2021, totalContracts: 1940 }
+]
+
+[5]
+db.contracts.aggregate([
+    {
+        $group: {
+            _id: "$NomeInstituicao",
+            totalContracts: { $sum: 1 }
+        }
+    },
+    {
+        $sort: { "totalContracts": -1 }
+    }
+])
+[
+  { _id: 'Universidade de Aveiro', totalContracts: 1066 },
+  {
+    _id: 'ISCTE - Instituto Universitário de Lisboa',
+    totalContracts: 510
+  },
+  {
+    _id: 'Universidade de Coimbra - Faculdade de Ciências e Tecnologia',
+    totalContracts: 482
+  },
+  {
+    _id: 'Universidade do Porto - Faculdade de Engenharia',
+    totalContracts: 432
+  },
+  {
+    _id: 'Universidade Nova de Lisboa - Faculdade de Ciências Sociais e Humanas',
+    totalContracts: 421
+  },
+  {
+    _id: 'Universidade de Lisboa - Instituto Superior Técnico',
+    totalContracts: 366
+  },
+  {
+    _id: 'Universidade Nova de Lisboa - Faculdade de Ciências e Tecnologia',
+    totalContracts: 341
+  },
+  {
+    _id: 'Universidade do Minho - Escola de Engenharia',
+    totalContracts: 334
+  },
+  {
+    _id: 'Universidade de Lisboa - Faculdade de Ciências',
+    totalContracts: 328
+  },
+  {
+    _id: 'Universidade do Porto - Faculdade de Ciências',
+    totalContracts: 313
+  },
+  {
+    _id: 'Universidade de Trás-os-Montes e Alto Douro',
+    totalContracts: 303
+  },
+  {
+    _id: 'Instituto Universitário da Maia - ISMAI',
+    totalContracts: 269
+  },
+  {
+    _id: 'Universidade do Porto - Faculdade de Medicina',
+    totalContracts: 254
+  },
+  {
+    _id: 'Universidade Lusófona de Humanidades e Tecnologias',
+    totalContracts: 247
+  },
+  { _id: 'Universidade Aberta', totalContracts: 246 },
+  {
+    _id: 'Instituto Politécnico do Porto - Instituto Superior de Engenharia do Porto',
+    totalContracts: 235
+  },
+  {
+    _id: 'Universidade do Porto - Instituto de Ciências Biomédicas Abel Salazar',
+    totalContracts: 220
+  },
+  {
+    _id: 'Universidade Nova de Lisboa - Faculdade de Ciências Médicas',
+    totalContracts: 176
+  },
+  { _id: 'Universidade do Minho', totalContracts: 166 },
+  {
+    _id: 'Instituto Politécnico do Porto - Escola Superior de Saúde do Porto',
+    totalContracts: 165
+  }
+]
+
