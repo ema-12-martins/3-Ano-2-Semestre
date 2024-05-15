@@ -12,4 +12,10 @@ router.get('/', function(req, res) {
     })
 });
 
+router.get('/:id', function(req, res) {
+  Contracts.findById(req.params.id)
+    .then(data => res.jsonp(data))
+    .catch(erro => res.jsonp(erro))
+});
+
 module.exports = router;

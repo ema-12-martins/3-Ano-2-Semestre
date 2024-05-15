@@ -7,3 +7,10 @@ module.exports.list = () => {
         .sort({creationDate : 1})
         .exec()
 }
+
+
+module.exports.findById = id => {
+    return Contracts
+        .findOne({_id : id})
+        .exec()
+}
