@@ -60,6 +60,7 @@ npm install jsonfile
 npm install multer
 npm install -i
 npm install mongoose
+npm install axios
 npm start
 ~~~
 

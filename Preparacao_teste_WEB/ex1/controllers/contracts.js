@@ -28,3 +28,23 @@ module.exports.cursosContratados = () => {
         .distinct("Curso")
         .exec()
 }
+
+module.exports.insert = con => {
+    if((Contracts.find({_id : con._id}).exec()).length != 1){
+        var newContracts = new Contracts(con)
+        return newContracts.save()
+    }
+}
+
+module.exports.remove = id => {
+    return Contracts
+        .find({_id : id})
+        .deleteOne()
+        .exec()
+}
+
+module.exports.update = (id, cont) => {
+    return Contracts
+        .findByIdAndUpdate(id, cont, {new : true})
+        .exec()
+}

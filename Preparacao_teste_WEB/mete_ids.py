@@ -7,7 +7,7 @@ def acrescenta_ids(nome_ficheiro):
         data = json.load(file)
 
     for i, item in enumerate(data):
-        item['_id'] = i + 1  
+        item['_id'] = str(i + 1)
   
     with open('nova_bd.json', 'w') as file:
         json.dump(data, file, indent=4)
