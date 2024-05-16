@@ -1,0 +1,29 @@
+extends layout 
+
+block content
+    .w3-card-4
+        header.w3-container.w3-teal
+            h1 Lista de Contrados
+                
+        
+        .w3-container
+            table.w3-table-all
+                tr
+                    th Id
+                    th DataInicioContrato
+                    th DataFimContrato
+                    th NomeInstituicao 
+                    th AreasInvestigacao
+
+                each objeto in listaObjetos
+                    tr 
+                        td
+                            a(href="/"+objeto._id)= objeto._id
+                        td= objeto.DataInicioContrato
+                        td= objeto.DataFimContrato
+                        td= objeto.NomeInstituicao 
+                        td= objeto.AreasInvestigacao
+                    
+        
+        footer.w3-container.w3-blue
+            h5 Generado por Ema Martins em #{date}
