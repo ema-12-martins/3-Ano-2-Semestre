@@ -4,18 +4,32 @@ var Contracts = require('../controllers/contracts')
 
 /* GET users listing. */
 router.get('/', function(req, res) {
-  Contracts.list()
+  const year = req.query.year;
+  if(!year){
+    Contracts.findContratosAno(req.query.year)
+    .then(data => res.jsonp(data))
+    .catch(erro => res.jsonp(erro))
+  }else{
+    Contracts.list()
     .then(data => res.jsonp(data))
     .catch(erro => {
       console.log(erro)
       res.jsonp(erro)
     })
+  }
 });
 
 router.get('/:id', function(req, res) {
-  Contracts.findById(req.params.id)
+  if(req.params.id==='courses'){
+    Contracts.cursosContratados()
     .then(data => res.jsonp(data))
     .catch(erro => res.jsonp(erro))
+  }else{
+    Contracts.findById(req.params.id)
+    .then(data => res.jsonp(data))
+    .catch(erro => res.jsonp(erro))
+  }
 });
+
 
 module.exports = router;

@@ -8,9 +8,23 @@ module.exports.list = () => {
         .exec()
 }
 
-
 module.exports.findById = id => {
     return Contracts
         .findOne({_id : id})
+        .exec()
+}
+
+module.exports.findContratosAno = ano => {
+    return Contracts.find({
+        $and: [
+            { DataInicioContrato: { $lte: `31/12/${ano}` } },
+            { DataFimContrato: { $gte: `01/01/${ano}` } }
+        ]
+    }).exec();
+}
+
+module.exports.cursosContratados = () => {
+    return Contracts
+        .distinct("Curso")
         .exec()
 }
