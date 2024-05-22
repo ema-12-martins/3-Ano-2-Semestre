@@ -3,16 +3,18 @@
     <h1>{{ msg }}</h1>
     <p>Este é só um texto exemplo para testar coisas em CSS.</p>
     <p>Não se percebe porque temos de programar CSS no papel mas faz parte.</p>
+  </div>
+
+  <div class="container-2">
     <ul>
       <li>{{ frase1 }}</li>
       <li>{{ frase2 }}</li>
-      <li>
-        <input type="text" id="nome" name="nome" :value="frase_nova" @input="atualiza_frase_nova" />
-      </li>
-      <li>
-        <button @click="mudaFrase">Clica aqui e muda uma frase</button>
-      </li>
     </ul>
+  </div>
+
+  <div class="container-3">
+    <input type="text" id="nome" name="nome" :value="frase_nova" @input="atualiza_frase_nova" />
+    <button @click="mudaFrase">Clica aqui e muda uma frase</button>
   </div>
 </template>
 
@@ -35,13 +37,19 @@ export default {
       this.frase_nova = event.target.value
     },
     mudaFrase() {
+      const valor_a_trocar = this.frase_nova.trim()
       this.contador += 1
-      if (this.contador % 2 == 0) {
-        this.frase2 = this.frase_nova.trim()
-        this.frase_nova = ''
-      } else {
-        this.frase1 = this.frase_nova.trim()
-        this.frase_nova = ''
+      if (valor_a_trocar===''){
+        alert('Intruduza texto antes de submeter')
+        this.frase_nova=''
+      }else{
+        if (this.contador % 2 == 0) {
+          this.frase2 = valor_a_trocar
+          this.frase_nova = ''
+        } else {
+          this.frase1 = valor_a_trocar
+          this.frase_nova = ''
+        }
       }
     }
   }
@@ -53,7 +61,27 @@ export default {
 .container-1 {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  background-color: aqua;
+  justify-content: space-between;
+  background-color: rgb(133, 65, 65);
+  
 }
+
+.container-2{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: grey;
+}
+
+.container-3{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+ul{
+  list-style-type: none;
+}
+
 </style>
