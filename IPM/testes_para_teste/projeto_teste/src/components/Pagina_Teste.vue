@@ -24,12 +24,15 @@ export default {
   props: {
     msg: String
   },
+  emits: ['lista_de_frases'],
   data() {
     return {
       frase1: 'Isto é uma lista',
       frase2: 'Temos vários elementos na lista',
       frase_nova: '',
-      contador: 0
+      contador: 0,
+      lista_de_frases: ['Isto é uma lista','Temos vários elementos na lista']
+
     }
   },
   methods: {
