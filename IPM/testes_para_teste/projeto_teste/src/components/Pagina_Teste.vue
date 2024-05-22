@@ -41,19 +41,21 @@ export default {
     },
     mudaFrase() {
       const valor_a_trocar = this.frase_nova.trim();
-      this.contador += 1;
       if (valor_a_trocar === '') {
         alert('Introduza texto antes de submeter');
         this.frase_nova = '';
       } else {
-        if (this.contador % 2 == 0) {
+        if (this.contador % 2 != 0) {
+          this.contador += 1;
           this.frase2 = valor_a_trocar;
+          this.lista_de_frases.push(valor_a_trocar)
         } else {
+          this.contador += 1;
           this.frase1 = valor_a_trocar;
+          this.lista_de_frases.push(valor_a_trocar)
         }
         this.frase_nova = '';
       }
-      this.lista_de_frases = [this.frase1, this.frase2];
       this.$emit('lista_de_frases', this.lista_de_frases);
     }
   }

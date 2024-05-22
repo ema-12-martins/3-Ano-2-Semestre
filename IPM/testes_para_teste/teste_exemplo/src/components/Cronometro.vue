@@ -1,23 +1,19 @@
 <template>
-  <div id="geral">
-    <div id="grid">
-      <div id="titulo">
-        <h1>Countdown 1</h1>
-      </div> 
-      <div id="lado">
-        <h1>Segunda Linha</h1>
-      </div>
-      <div id="slide">
-        <h1>Terceira Linha</h1>
-      </div>
-      <div id="cancel"> 
-        <botom >Cancel</botom>
-      </div>
-      <div id="save">
-        <botom>Save</botom>
-      </div>
+    <my-label :id="cronoName" />
+    
+    <div class="horiz1">
+      <button @click="decrease">&#9664;</button>{{ crValue }}s
+      <button @click="increase">&#9658;</button>
     </div>
-  </div>  
+
+    <div class="slide">
+      <h1>----------------</h1>
+    </div>
+    
+    <div class="horiz2">
+      <button @click="onCancel">Cancel</button>
+      <button @click="onSave">Save</button>
+    </div>
 </template>
 
 <script>
@@ -25,6 +21,11 @@ export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  data(){
+    return{
+      visualizacao_diminuida:false
+    }
   }
 }
 </script>
@@ -36,61 +37,15 @@ ul {
   padding: 0;
 }
 
-#geral{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-}
-
 #grid{
   display: grid;
   grid-template-columns: 1fr auto;
   grid-template-rows: 1fr auto;
-  gap: 20px 10px;
+  gap: 20px 20px;
   grid-template-areas:
-    ". . . . ."
-    ". . titulo . ."
-    ". . lado . ."
-    ". . slide . ."
-    ". cancel . save ."
     ". . . . .";
   color: #000000;
 }
 
-#titulo{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  grid-area: titulo;
-}
-
-#lado{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  grid-area: lado;
-}
-
-#slide{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  grid-area: slide;
-}
-
-#cancel{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  grid-area: cancel;
-}
-
-#save{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  grid-area: save;
-}
 
 </style>
