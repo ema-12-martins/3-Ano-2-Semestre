@@ -1,14 +1,14 @@
 <template>
-  <div id="container-1"> 
+  <div id="container-1" class="container"> 
     <h1>{{dataAtual}}</h1>
     <h1>{{horaAtual}}</h1>
   </div>
 
-  <div id="container-2"> 
+  <div id="container-2" class="container"> 
     <Pagina_Teste msg="Vais escrever isto" />
   </div> 
 
-  <div id="container-3">
+  <div id="container-3" class="container">
     <div v-if="visualizacao === 'Ativado'">
       <button @click="mudaVisualizacao">Clique para desativar a visualização</button>
     </div>
@@ -101,5 +101,10 @@ export default {
   grid-area: container-3;
 }
 
+@media screen and (max-width: 640px) {
+  .container {
+    min-width: 300px;
+  }
+}
 
 </style>
