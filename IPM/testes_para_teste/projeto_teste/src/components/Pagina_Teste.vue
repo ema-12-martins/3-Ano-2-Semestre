@@ -10,9 +10,7 @@
       <li>{{ frase1 }}</li>
       <li>{{ frase2 }}</li>
     </ul>
-  </div>
-
-  <div class="container-3">
+  
     <input type="text" id="nome" name="nome" :value="frase_nova" @input="atualiza_frase_nova" />
     <button @click="mudaFrase">Clica aqui e muda uma frase</button>
   </div>
@@ -65,8 +63,10 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
   background-color: rgb(133, 65, 65);
-  
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .container-2{
@@ -74,13 +74,7 @@ export default {
   flex-direction: column;
   justify-content: space-between;
   background-color: grey;
-}
-
-.container-3{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin-top: 20px;
+  align-items: center;
 }
 
 ul{

@@ -1,0 +1,37 @@
+    created() {
+        this.verificarRota();
+        document.documentElement.classList.add('Perfil-html-body');
+        document.body.classList.add('Perfil-html-body');
+    },
+    
+    watch: {
+        // Observa mudanças na rota e chama verificarRota novamente
+        $route() {
+            this.verificarRota();
+        }
+    }
+    
+    mounted() {
+        document.documentElement.classList.add('paginaServicoIniciado-html-body');
+        document.body.classList.add('paginaServicoIniciado-html-body');
+    },
+    beforeUnmount() {
+        document.documentElement.classList.remove('paginaServicoIniciado-html-body');
+        document.body.classList.remove('paginaServicoIniciado-html-body');
+    }
+    
+     computed: {
+        buttonDisabled: function(){
+            return this.enteredTodo.trim() == ''
+        }
+    }    
+    
+@media screen and (max-width: 640px) {
+  .container {
+    min-width: 300px;
+  }
+}
+
+
+....
+text-align: center;

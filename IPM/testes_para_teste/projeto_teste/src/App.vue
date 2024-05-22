@@ -1,25 +1,30 @@
 <template>
-  <h1>{{dataAtual}}</h1>
-  <h1>{{horaAtual}}</h1>
-
-  <Pagina_Teste msg="Vais escrever isto" />
-
-  <div v-if="visualizacao === 'Ativado'">
-    <button @click="mudaVisualizacao">Clique para desativar a visualização</button>
-  </div>
-  <div v-else>
-    <button @click="mudaVisualizacao">Clique para ativar a visualização</button>
+  <div id="container-1"> 
+    <h1>{{dataAtual}}</h1>
+    <h1>{{horaAtual}}</h1>
   </div>
 
-  <div v-if="visualizacao === 'Ativado'">
-    <ul>
-      <li v-for="(frase, index) in lista_de_frases" :key="index">{{ frase }}</li>
-    </ul>
-  </div>
-  <div v-else>
-    <p>Nao vamos listar</p>
-  </div>
+  <div id="container-2"> 
+    <Pagina_Teste msg="Vais escrever isto" />
+  </div> 
 
+  <div id="container-3">
+    <div v-if="visualizacao === 'Ativado'">
+      <button @click="mudaVisualizacao">Clique para desativar a visualização</button>
+    </div>
+    <div v-else>
+      <button @click="mudaVisualizacao">Clique para ativar a visualização</button>
+    </div>
+
+    <div v-if="visualizacao === 'Ativado'">
+      <ul>
+        <li v-for='(frase, index) in lista_de_frases' :key='index'>{{ frase }}</li>
+      </ul>
+    </div>
+    <div v-else>
+      <p>Nao vamos listar</p>
+    </div>
+  </div>  
 </template>
 
 <script>
@@ -69,11 +74,32 @@ export default {
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: 1fr auto;
+  gap: 20px 10px;
+  grid-template-areas:
+  "container-1"
+  "container-2"
+  "container-3";
+
   color: #000000;
-  margin-top: 60px;
 }
+
+#container-1{
+  background-color: aqua;
+  grid-area: container-1;
+}
+
+#container-2{
+  background-color: blueviolet;
+  grid-area: container-2;
+}
+
+#container-3{
+  background-color: goldenrod;
+  grid-area: container-3;
+}
+
+
 </style>
