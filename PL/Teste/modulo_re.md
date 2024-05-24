@@ -12,6 +12,26 @@ Alguns conceitos de expressões regulares:
 - **(a)** para formar grupos de captura
 - **(?i:teste)** para apanhar casos sem ter em conta de é maiuscula ou minuscula
 - **a?** torna a opcional
+- **w** alfanumericos (a-z,A-z,0-9,_)
+- **\W** nao alfanumerico 
+- **\s** whitespace (' ', '\t', ou '\n', por exemplo).
+- **\S** caracter que não seja whitespace.
+- **\d** dígito.
+- **\D** não dígito.
+
+Podemos usar grupos de captura em expressões regulares para isolar segmentos da string capturada. Usamos parênteses para definir grupos de captura. Se colocarmos **?:** num grupo, este deixa de ser um grupo de captura.
+
+~~~ python
+import re
+
+m = re.search(r'(2[0-3]|[0-1][0-9]):([0-5][0-9])', "a hora é 13:49")
+
+print(m.groups()) # conjunto dos grupos de captura
+print(m.group(0)) # toda a string capturada
+print(m.group(1)) # o primeiro grupo de captura
+~~~
+
+Podemos, através do operador **?**, torná-los preguiçosos (lazy).
 
 # Modulo RE
 O método **match** procura um padrão no início de uma string.
@@ -115,3 +135,21 @@ print("Sub resultado:", replaced_text)  # Saída: abc#def#ghi#
 13. Define a função underscores que substitui todos os espaços numa string por underscores. Se aparecerem vários espaços seguidos, devem ser substituídos por apenas um underscore.
 
 14. Define a função codigos_postais que recebe uma lista de códigos postais válidos e divide-os com base no hífen. A função deve devolver uma lista de pares.
+
+15. Define a função iso_8601 que converte as datas presentes numa string no formato DD/MM/AAAA para o formato ISO 8601 - AAAA-MM-DD, usando expressões regulares e grupos de captura.
+
+16. Escreve um programa que lê uma lista de nomes de ficheiros e determina se cada nome é válido ou não. O nome de um ficheiro deve conter apenas caracteres alfanuméricos, hífens, underscores ou pontos, seguido de uma extensão (e.g., ".txt", ".png", etc.).
+
+17. Modifica o programa anterior para colocar os nomes de ficheiro válidos num dicionário, no qual as chaves deverão ser as extensões dos mesmos. Por outras palavras, agrupa os ficheiros por extensão.
+
+18. Escreve um filtro de texto que converte cada nome completo de uma pessoa encontrada num texto fonte, no formato PrimeiroNome SegundoNome [...] UltimoNome para o formato UltimoNome, PrimeiroNome. Por exemplo, "Rui Vieira de Castro" passa a "Castro, Rui". Atenção aos conectores "de", "dos", etc.
+
+19. Define uma função codigos_postais que recebe uma lista de códigos postais e divide-os com base no hífen. Ao contrário do exercício da ficha anterior, esta função pode receber códigos postais inválidos. A função deve devolver uma lista de pares e apenas processar cada linha uma vez.
+
+20. Escreve um filtro de texto que expanda as abreviaturas que encontrar no texto fonte no formato "/abrev".
+
+21. Define uma função matricula_valida que recebe uma string de texto e determina se esta contém uma matrícula válida. Uma matrícula segue o formato AA-BB-CC, no qual dois dos três conjuntos devem ser compostos por números e o terceiro por letras maiúsculas (por exemplo, 01-AB-23), ou o novo formato no qual dois dos conjuntos são compostos por letras maiúsculas e o terceiro por números (por exemplo, 89-WX-YZ). Os conjuntos podem ser separados por um hífen ou um espaço.
+
+22. O jogo Mad Libs, bastante comum em países como os Estados Unidos, consiste em pegar num texto com espaços para algumas palavras e preencher esses espaços de acordo com o tipo de palavra que é pedida. Escreve um programa que lê um texto no formato Mad Libs e pede ao utilizador para fornecer palavras que completem corretamente o texto.
+
+23. Escreve um filtro de texto que sempre que encontrar no texto fonte uma palavra repetida elimina as repetições, ou seja, substitui a lista de palavras por 1 só palavra.
