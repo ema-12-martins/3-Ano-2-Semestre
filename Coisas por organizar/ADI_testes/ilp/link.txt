@@ -1,0 +1,19 @@
+https://archive.ics.uci.edu/dataset/225/ilpd+indian+liver+patient+dataset
+
+Age
+Year of birth
+Month of birth
+Birthday
+Gender
+Total bilirubin
+Direct Bilirubin
+Alkaline Phosphotase
+Alamine Aminotransferase
+Aspartate Aminotransferase
+Total Proteins
+Albumin
+Cholesterol
+Albumin and Globulin Ratio
+Bilirubin (mg/dL)
+Selector (target variable)
+
